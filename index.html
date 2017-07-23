@@ -39,7 +39,8 @@
           <label class="col-sm-1 control-label" for="from">From:</label>
           <div class="col-sm-11">
             <select id="from" class="form-control">
-              <option value="">Current Location</option><option value='34.9861116,135.7525122' data-group='0'>Rihga Royal Hotel Kyoto</option>
+              <option value=''>Current Location</option>
+<option value='34.9861116,135.7525122' data-group='0'>Rihga Royal Hotel Kyoto</option>
 <option value='34.9914842,135.7517349' data-group='0'>西本願寺 Nishihongan-ji Temple</option>
 <option value='34.9811177,135.7475964' data-group='0'>東寺 Toji</option>
 <option value='35.0142299,135.748218' data-group='0'>二条城 Nijō Castle</option>
@@ -82,7 +83,8 @@
           <label class="col-sm-1 control-label" for="to">To:</label>
           <div class="col-sm-11">
             <select id="to" class="form-control">
-              <option value="">Current Location</option><option value='34.9861116,135.7525122' data-group='0'>Rihga Royal Hotel Kyoto</option>
+              <option value=''>Current Location</option>
+<option value='34.9861116,135.7525122' data-group='0'>Rihga Royal Hotel Kyoto</option>
 <option value='34.9914842,135.7517349' data-group='0'>西本願寺 Nishihongan-ji Temple</option>
 <option value='34.9811177,135.7475964' data-group='0'>東寺 Toji</option>
 <option value='35.0142299,135.748218' data-group='0'>二条城 Nijō Castle</option>
@@ -164,12 +166,20 @@
     </div>
 
     <script>
-      $('.nav-pills a').on('click', function () {
+      var from_html = $('#from').html();
+      var to_html = $('#to').html();
+
+      $('.nav-pills a').on('click', function (event) {
+        event.preventDefault();
         var group = $(this).data('group');
         $(this).closest('li').toggleClass('active');
-        $(`option[data-group="${group}"]`).toggle();
-        $('#from').val('');
-        $('#to').val('');
+
+        $('#from').html(from_html);
+        $('#to').html(to_html);
+        $('li:not([class^="active"])').each(function () {
+          var hide_group = $(this).find('a').data('group');
+          $(`option[data-group="${hide_group}"]`).remove();
+        });
       });
 
       $('#from, #to, [name="mode"]').on('click', function () {

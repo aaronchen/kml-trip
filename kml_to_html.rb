@@ -7,7 +7,7 @@ doc = Nokogiri::XML(open("http://www.google.com/maps/d/kml?forcekml=1&mid=#{mid}
 
 title = doc.css('Document').at_css('name').children.text
 lists = ''
-options = '<option value="">Current Location</option>'
+options = "<option value=''>Current Location</option>\n"
 
 doc.css('Folder').each_with_index do |folder, index|
   lists += "<li class='active'><a href='#' data-group='#{index}'>#{folder.at_css('name').children.text}</a></li>\n"
@@ -113,12 +113,20 @@ html = <<-EOF
     </div>
 
     <script>
-      $('.nav-pills a').on('click', function () {
+      var from_html = $('#from').html();
+      var to_html = $('#to').html();
+
+      $('.nav-pills a').on('click', function (event) {
+        event.preventDefault();
         var group = $(this).data('group');
         $(this).closest('li').toggleClass('active');
-        $(`option[data-group="${group}"]`).toggle();
-        $('#from').val('');
-        $('#to').val('');
+
+        $('#from').html(from_html);
+        $('#to').html(to_html);
+        $('li:not([class^="active"])').each(function () {
+          var hide_group = $(this).find('a').data('group');
+          $(`option[data-group="${hide_group}"]`).remove();
+        });
       });
 
       $('#from, #to, [name="mode"]').on('click', function () {
