@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require 'nokogiri'
 require 'open-uri'
 
@@ -37,6 +39,9 @@ html = <<-EOF
     <style>
       .nav-pills { margin: 20px 0; }
       .nav-pills > li > a { padding: 8px 10px; }
+      .btn { margin: 5px 0; }
+      .glyphicon-map-marker { color: #333; }
+      .glyphicon-arrow-right { color: #999; }
       a, a:hover { text-decoration: none; }
     </style>
   </head>
@@ -95,18 +100,22 @@ html = <<-EOF
 
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">Google Maps</h3>
+          <h3 class="panel-title">
+            <span class="glyphicon glyphicon-apple"></span> Apple Maps
+          </h3>
         </div>
-        <div class="panel-body" id="google">
+        <div class="panel-body" id="apple">
           No Route Yet
         </div>
       </div>
 
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">Apple Maps</h3>
+          <h3 class="panel-title">
+            <span class="glyphicon glyphicon-globe"></span> Google Maps
+          </h3>
         </div>
-        <div class="panel-body" id="apple">
+        <div class="panel-body" id="google">
           No Route Yet
         </div>
       </div>
@@ -140,7 +149,11 @@ html = <<-EOF
         var to_value = $('#to').val();
         var to_text = $('#to option:selected').text();
         var mode = $('[name="mode"]:checked').val();
-        var href_text = `${from_text} &gt;&gt;&gt; ${to_text}`;
+        var href_text = `
+          <span class="glyphicon glyphicon-map-marker"></span> ${from_text}
+          &nbsp;<span class="glyphicon glyphicon-arrow-right"></span>&nbsp;
+          <span class="glyphicon glyphicon-map-marker"></span> ${to_text}
+        `;
 
         var mode_apple = 'r';
         var mode_google = 'transit';
