@@ -74,13 +74,13 @@ html = <<-EOF
           <div class="col-sm-11 col-sm-offset-1">
             <div class="radio">
               <label class="radio-inline">
-                <input type="radio" name="mode" value="transit" checked> Transit
+                <input type="radio" name="mode" value="1" checked> Transit
               </label>
               <label class="radio-inline">
-                <input type="radio" name="mode" value="driving"> Driving
+                <input type="radio" name="mode" value="2"> Driving
               </label>
               <label class="radio-inline">
-                <input type="radio" name="mode" value="walking"> Walking
+                <input type="radio" name="mode" value="3"> Walking
               </label>
             </div>
           </div>
@@ -130,6 +130,7 @@ html = <<-EOF
       });
 
       $('#from, #to, [name="mode"]').on('click', function () {
+        $('#apple').empty().append('No Route Yet');
         $('#google').empty().append('No Route Yet');
       });
 
@@ -140,8 +141,17 @@ html = <<-EOF
         var to_text = $('#to option:selected').text();
         var mode = $('[name="mode"]:checked').val();
         var href_text = `${from_text} &gt;&gt;&gt; ${to_text}`;
-        var api_google = `https://www.google.com/maps/dir/?api=1&origin=${from_value}&destination=${to_value}&travelmode=${mode}`;
 
+        var mode_apple = 'r';
+        var mode_google = 'transit';
+
+        if (mode == 2) { mode_apple = 'd'; mode_google = 'driving'; }
+        else if (mode == 3) { mode_apple = 'w'; mode_google = 'walking'; }
+
+        var api_apple = `http://maps.apple.com/?saddr=${from_value}&daddr=${to_value}&dirflg=${mode_apple}`;
+        var api_google = `https://www.google.com/maps/dir/?api=1&origin=${from_value}&destination=${to_value}&travelmode=${mode_google}`;
+
+        $('#apple').empty().append(`<a href="${api_apple}" target="_blank">${href_text}</a>`);
         $('#google').empty().append(`<a href="${api_google}" target="_blank">${href_text}</a>`);
       });
     </script>
