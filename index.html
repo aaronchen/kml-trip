@@ -19,7 +19,7 @@
       .btn { margin: 5px 0; }
       .glyphicon-map-marker { color: #333; }
       .glyphicon-arrow-right { color: #999; }
-      a, a:hover { text-decoration: none; }
+      a:link, a:visited, a:visited:hover, a:hover, a:active { text-decoration: none; }
     </style>
   </head>
 
@@ -30,10 +30,11 @@
       </h3>
 
       <ul class="nav nav-pills">
-        <li class='active'><a href='#' data-group='0'>Kyoto 京都</a></li>
-<li class='active'><a href='#' data-group='1'>Nara 奈良</a></li>
-<li class='active'><a href='#' data-group='2'>Osaka 大阪</a></li>
-<li class='active'><a href='#' data-group='3'>Kobe 神戶</a></li>
+        
+<li class='active'><a href='#' data-group='0'>Kyoto 京都</a></li>
+<li class='active'><a href='#' data-group='1'>京都 吃喝</a></li>
+<li class='active'><a href='#' data-group='2'>Nara 奈良</a></li>
+<li class='active'><a href='#' data-group='3'>Osaka 大阪</a></li>
 
       </ul>
 
@@ -42,7 +43,8 @@
           <label class="col-sm-1 control-label" for="from">From:</label>
           <div class="col-sm-11">
             <select id="from" class="form-control">
-              <option value=''>Current Location</option>
+              
+<option value=''>Current Location</option>
 <option value='34.9861116,135.7525122' data-group='0'>Rihga Royal Hotel Kyoto</option>
 <option value='34.9914842,135.7517349' data-group='0'>西本願寺 Nishihongan-ji Temple</option>
 <option value='34.9811177,135.7475964' data-group='0'>東寺 Toji</option>
@@ -60,23 +62,24 @@
 <option value='35.0214836,135.7942056' data-group='0'>哲学の道 Tetsugaku-no-michi</option>
 <option value='35.0271518,135.7978642' data-group='0'>銀閣寺 Ginkaku-ji Temple</option>
 <option value='35.039171,135.773011' data-group='0'>下鴨神社 Shimogamo-Jinja</option>
+<option value='35.0262444,135.7808218' data-group='0'>京都大学 Kyoto University</option>
 <option value='35.0158275,135.673771' data-group='0'>天龍寺 Tenryu-ji</option>
 <option value='35.0177597,135.6742103' data-group='0'>野宮神社 Nonomiya Shrine</option>
 <option value='35.0176088,135.6743552' data-group='0'>嵯峨野 竹林の道 Chikurin</option>
-<option value='34.9853943,135.758282' data-group='0'>抹茶.甜點 中村藤吉</option>
-<option value='35.0050002,135.7632709' data-group='0'>錦市場 Nishiki Market</option>
-<option value='35.0044019,135.7613432' data-group='0'>HARBS</option>
-<option value='35.0058157,135.7680653' data-group='0'>一蘭拉麵 Ichiran Kyoto Kawaramachi</option>
-<option value='35.0143941,135.7585817' data-group='0'>鰻割烹 まえはら</option>
-<option value='35.0049407,135.7643007' data-group='0'>味彩のと与</option>
-<option value='34.997126,135.763273' data-group='0'>江戸正 Edoshou</option>
-<option value='34.9791213,135.7509509' data-group='0'>美登利</option>
-<option value='35.0020619,135.7743841' data-group='0'>Uokeya U</option>
-<option value='35.0050873,135.7710818' data-group='0'>先斗町 Pontocho Area</option>
-<option value='35.000533,135.7788273' data-group='0'>葫蘆親子丼</option>
-<option value='35.0169903,135.6772921' data-group='0'>うなぎ屋廣川 Hirokawa</option>
-<option value='34.6889851,135.8398158' data-group='1'>東大寺 Tōdai-ji</option>
-<option value='34.4320024,135.2303939' data-group='2'>関西国際空港 Kansai International Airport</option>
+<option value='34.9853943,135.758282' data-group='1'>抹茶.甜點 中村藤吉</option>
+<option value='35.0044019,135.7613432' data-group='1'>HARBS</option>
+<option value='35.0050002,135.7632709' data-group='1'>錦市場 Nishiki Market</option>
+<option value='35.0058157,135.7680653' data-group='1'>一蘭拉麵 Ichiran Kyoto Kawaramachi</option>
+<option value='35.0143941,135.7585817' data-group='1'>鰻割烹 まえはら</option>
+<option value='35.0049407,135.7643007' data-group='1'>味彩のと与</option>
+<option value='34.997126,135.763273' data-group='1'>江戸正 Edoshou</option>
+<option value='34.9791213,135.7509509' data-group='1'>美登利</option>
+<option value='35.0020619,135.7743841' data-group='1'>Uokeya U</option>
+<option value='35.0050873,135.7710818' data-group='1'>先斗町 Pontocho Area</option>
+<option value='35.000533,135.7788273' data-group='1'>葫蘆親子丼</option>
+<option value='35.0169903,135.6772921' data-group='1'>うなぎ屋廣川 Hirokawa</option>
+<option value='34.6889851,135.8398158' data-group='2'>東大寺 Tōdai-ji</option>
+<option value='34.4320024,135.2303939' data-group='3'>関西国際空港 Kansai International Airport</option>
 
             </select>
           </div>
@@ -86,7 +89,8 @@
           <label class="col-sm-1 control-label" for="to">To:</label>
           <div class="col-sm-11">
             <select id="to" class="form-control">
-              <option value=''>Current Location</option>
+              
+<option value=''>Current Location</option>
 <option value='34.9861116,135.7525122' data-group='0'>Rihga Royal Hotel Kyoto</option>
 <option value='34.9914842,135.7517349' data-group='0'>西本願寺 Nishihongan-ji Temple</option>
 <option value='34.9811177,135.7475964' data-group='0'>東寺 Toji</option>
@@ -104,23 +108,24 @@
 <option value='35.0214836,135.7942056' data-group='0'>哲学の道 Tetsugaku-no-michi</option>
 <option value='35.0271518,135.7978642' data-group='0'>銀閣寺 Ginkaku-ji Temple</option>
 <option value='35.039171,135.773011' data-group='0'>下鴨神社 Shimogamo-Jinja</option>
+<option value='35.0262444,135.7808218' data-group='0'>京都大学 Kyoto University</option>
 <option value='35.0158275,135.673771' data-group='0'>天龍寺 Tenryu-ji</option>
 <option value='35.0177597,135.6742103' data-group='0'>野宮神社 Nonomiya Shrine</option>
 <option value='35.0176088,135.6743552' data-group='0'>嵯峨野 竹林の道 Chikurin</option>
-<option value='34.9853943,135.758282' data-group='0'>抹茶.甜點 中村藤吉</option>
-<option value='35.0050002,135.7632709' data-group='0'>錦市場 Nishiki Market</option>
-<option value='35.0044019,135.7613432' data-group='0'>HARBS</option>
-<option value='35.0058157,135.7680653' data-group='0'>一蘭拉麵 Ichiran Kyoto Kawaramachi</option>
-<option value='35.0143941,135.7585817' data-group='0'>鰻割烹 まえはら</option>
-<option value='35.0049407,135.7643007' data-group='0'>味彩のと与</option>
-<option value='34.997126,135.763273' data-group='0'>江戸正 Edoshou</option>
-<option value='34.9791213,135.7509509' data-group='0'>美登利</option>
-<option value='35.0020619,135.7743841' data-group='0'>Uokeya U</option>
-<option value='35.0050873,135.7710818' data-group='0'>先斗町 Pontocho Area</option>
-<option value='35.000533,135.7788273' data-group='0'>葫蘆親子丼</option>
-<option value='35.0169903,135.6772921' data-group='0'>うなぎ屋廣川 Hirokawa</option>
-<option value='34.6889851,135.8398158' data-group='1'>東大寺 Tōdai-ji</option>
-<option value='34.4320024,135.2303939' data-group='2'>関西国際空港 Kansai International Airport</option>
+<option value='34.9853943,135.758282' data-group='1'>抹茶.甜點 中村藤吉</option>
+<option value='35.0044019,135.7613432' data-group='1'>HARBS</option>
+<option value='35.0050002,135.7632709' data-group='1'>錦市場 Nishiki Market</option>
+<option value='35.0058157,135.7680653' data-group='1'>一蘭拉麵 Ichiran Kyoto Kawaramachi</option>
+<option value='35.0143941,135.7585817' data-group='1'>鰻割烹 まえはら</option>
+<option value='35.0049407,135.7643007' data-group='1'>味彩のと与</option>
+<option value='34.997126,135.763273' data-group='1'>江戸正 Edoshou</option>
+<option value='34.9791213,135.7509509' data-group='1'>美登利</option>
+<option value='35.0020619,135.7743841' data-group='1'>Uokeya U</option>
+<option value='35.0050873,135.7710818' data-group='1'>先斗町 Pontocho Area</option>
+<option value='35.000533,135.7788273' data-group='1'>葫蘆親子丼</option>
+<option value='35.0169903,135.6772921' data-group='1'>うなぎ屋廣川 Hirokawa</option>
+<option value='34.6889851,135.8398158' data-group='2'>東大寺 Tōdai-ji</option>
+<option value='34.4320024,135.2303939' data-group='3'>関西国際空港 Kansai International Airport</option>
 
             </select>
           </div>

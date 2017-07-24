@@ -8,8 +8,8 @@ mid = '15vPov13dsFDc09OMAwruKQI5MjM'
 doc = Nokogiri::XML(open("http://www.google.com/maps/d/kml?forcekml=1&mid=#{mid}"))
 
 title = doc.css('Document').at_css('name').children.text
-lists = ''
-options = "<option value=''>Current Location</option>\n"
+lists = "\n"
+options = "\n<option value=''>Current Location</option>\n"
 
 doc.css('Folder').each_with_index do |folder, index|
   lists += "<li class='active'><a href='#' data-group='#{index}'>#{folder.at_css('name').children.text}</a></li>\n"
@@ -42,7 +42,7 @@ html = <<-EOF
       .btn { margin: 5px 0; }
       .glyphicon-map-marker { color: #333; }
       .glyphicon-arrow-right { color: #999; }
-      a, a:hover { text-decoration: none; }
+      a:link, a:visited, a:visited:hover, a:hover, a:active { text-decoration: none; }
     </style>
   </head>
 
