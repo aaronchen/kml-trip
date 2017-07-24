@@ -9,7 +9,7 @@ doc = Nokogiri::XML(open("http://www.google.com/maps/d/kml?forcekml=1&mid=#{mid}
 
 title = doc.css('Document').at_css('name').children.text
 lists = "\n"
-options = "\n<option value='' data-color='#39c'>現在地點 Current Location</option>\n"
+options = "\n<option value='' data-color='#d3a'>現在地點 Current Location</option>\n"
 
 doc.css('Folder').each_with_index do |folder, index|
   lists += "<li class='active'><a href='#' data-group='#{index}'>#{folder.at_css('name').children.text}</a></li>\n"
