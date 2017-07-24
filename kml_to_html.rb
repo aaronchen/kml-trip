@@ -9,14 +9,15 @@ doc = Nokogiri::XML(open("http://www.google.com/maps/d/kml?forcekml=1&mid=#{mid}
 
 title = doc.css('Document').at_css('name').children.text
 lists = "\n"
-options = "\n<option value=''>Current Location</option>\n"
+options = "\n<option value='' data-color='#39c'>現在地點 Current Location</option>\n"
 
 doc.css('Folder').each_with_index do |folder, index|
   lists += "<li class='active'><a href='#' data-group='#{index}'>#{folder.at_css('name').children.text}</a></li>\n"
   folder.css('Placemark').each do |placemark|
     name = placemark.at_css('name').children.text
+    color = placemark.at_css('styleUrl').children.text.split('-')[2]
     coordinates = placemark.at_css('coordinates').children.text.strip.split(',')
-    options += "<option value='#{coordinates[1]},#{coordinates[0]}' data-group='#{index}'>#{name}</option>\n"
+    options += "<option value='#{coordinates[1]},#{coordinates[0]}' data-group='#{index}' data-color='##{color}'>#{name}</option>\n"
   end
 end
 
@@ -146,13 +147,17 @@ html = <<-EOF
       $('#route').on('click', function () {
         var from_value = $('#from').val();
         var from_text = $('#from option:selected').text();
+        var from_color = $('#from option:selected').data('color');
         var to_value = $('#to').val();
         var to_text = $('#to option:selected').text();
+        var to_color = $('#to option:selected').data('color');
         var mode = $('[name="mode"]:checked').val();
         var href_text = `
-          <span class="glyphicon glyphicon-map-marker"></span> ${from_text}
+          <span class="glyphicon glyphicon-map-marker"></span>
+          <span style='color: ${from_color};'>${from_text}</span>
           &nbsp;<span class="glyphicon glyphicon-arrow-right"></span>&nbsp;
-          <span class="glyphicon glyphicon-map-marker"></span> ${to_text}
+          <span class="glyphicon glyphicon-map-marker"></span>
+          <span style='color: ${to_color};'>${to_text}</span>
         `;
 
         var mode_apple = 'r';
