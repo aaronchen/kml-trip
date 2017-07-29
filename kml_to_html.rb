@@ -185,7 +185,7 @@ html = <<-EOF
         if (geocode.length == 2) {
           var map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: Number(geocode[0]), lng: Number(geocode[1])},
-            zoom: 17
+            zoom: 19
           });
         }
       });
