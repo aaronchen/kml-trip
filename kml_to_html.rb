@@ -44,10 +44,11 @@ html = <<-EOF
       .nav-pills { margin: 20px 0; }
       .nav-pills > li > a { padding: 8px 10px; }
       .btn { margin: 5px 0; }
+      .label { background-color: #444; display: inline-block; margin: 10px 10px 0 0; padding: 4px 0; width: 45px; }
       .glyphicon-map-marker { color: #333; }
       .glyphicon-arrow-right { color: #999; }
       a:link, a:visited, a:visited:hover, a:hover, a:active { text-decoration: none; }
-      #map { width: 80%; height: 300px; }
+      #map { width: 100%; height: 300px; }
     </style>
   </head>
 
@@ -106,27 +107,26 @@ html = <<-EOF
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">
-            <span class="glyphicon glyphicon-apple"></span> Apple Maps
+            <span class="glyphicon glyphicon-screenshot"></span> Directions
           </h3>
         </div>
-        <div class="panel-body" id="apple">
-          No Route Yet
+        <div class="panel-body">
+          <div><span class="label">Apple</span><span id="apple">No Route Yet</span></div>
+          <div><span class="label">Google</span><span id="google">No Route Yet</span></div>
         </div>
       </div>
 
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">
-            <span class="glyphicon glyphicon-globe"></span> Google Maps
+            <span class="glyphicon glyphicon-exclamation-sign"></span> Information
           </h3>
         </div>
-        <div class="panel-body" id="google">
-          No Route Yet
+        <div class="panel-body">
+          <div id="map"></div>
         </div>
       </div>
     </div>
-
-    <div id="map" class="container-fluid"></div>
 
     <script>
       var from_html = $('#from').html();
@@ -137,7 +137,7 @@ html = <<-EOF
         var group = $(this).data('group');
         $(this).closest('li').toggleClass('active');
 
-        $('#from').html(from_html);
+        $('#from').html(from_html).change();
         $('#to').html(to_html);
         $('li:not([class^="active"])').each(function () {
           var hide_group = $(this).find('a').data('group');
@@ -183,10 +183,12 @@ html = <<-EOF
         var location = $(this).val();
         var geocode = location.split(',');
         if (geocode.length == 2) {
-          var map = new google.maps.Map(document.getElementById('map'), {
+          var map = new google.maps.Map($('#map')[0], {
             center: {lat: Number(geocode[0]), lng: Number(geocode[1])},
             zoom: 19
           });
+        } else {
+          $('#map').empty();
         }
       });
     </script>
