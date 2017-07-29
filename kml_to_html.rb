@@ -37,6 +37,9 @@ html = <<-EOF
 
     <link rel="stylesheet" href="https://bootswatch.com/paper/bootstrap.min.css">
 
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCikPtaGJr5nKhCpgqnjuwkDz33o94PAgM&libraries=places">
+    </script>
+
     <style>
       .nav-pills { margin: 20px 0; }
       .nav-pills > li > a { padding: 8px 10px; }
@@ -44,6 +47,7 @@ html = <<-EOF
       .glyphicon-map-marker { color: #333; }
       .glyphicon-arrow-right { color: #999; }
       a:link, a:visited, a:visited:hover, a:hover, a:active { text-decoration: none; }
+      #map { width: 80%; height: 300px; }
     </style>
   </head>
 
@@ -122,6 +126,8 @@ html = <<-EOF
       </div>
     </div>
 
+    <div id="map" class="container-fluid"></div>
+
     <script>
       var from_html = $('#from').html();
       var to_html = $('#to').html();
@@ -171,6 +177,17 @@ html = <<-EOF
 
         $('#apple').empty().append(`<a href="${api_apple}" target="_blank">${href_text}</a>`);
         $('#google').empty().append(`<a href="${api_google}" target="_blank">${href_text}</a>`);
+      });
+
+      $('#from').on('change', function () {
+        var location = $(this).val();
+        var geocode = location.split(',');
+        if (geocode.length == 2) {
+          var map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: Number(geocode[0]), lng: Number(geocode[1])},
+            zoom: 17
+          });
+        }
       });
     </script>
   </body>

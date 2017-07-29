@@ -13,6 +13,9 @@
 
     <link rel="stylesheet" href="https://bootswatch.com/paper/bootstrap.min.css">
 
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCikPtaGJr5nKhCpgqnjuwkDz33o94PAgM&libraries=places">
+    </script>
+
     <style>
       .nav-pills { margin: 20px 0; }
       .nav-pills > li > a { padding: 8px 10px; }
@@ -20,6 +23,7 @@
       .glyphicon-map-marker { color: #333; }
       .glyphicon-arrow-right { color: #999; }
       a:link, a:visited, a:visited:hover, a:hover, a:active { text-decoration: none; }
+      #map { width: 80%; height: 300px; }
     </style>
   </head>
 
@@ -49,6 +53,7 @@
 <option value='34.9914842,135.7517349' data-group='0' data-color='#E65100'>西本願寺 Nishihongan-ji Temple</option>
 <option value='34.9811177,135.7475964' data-group='0' data-color='#E65100'>東寺 Toji</option>
 <option value='35.0142299,135.748218' data-group='0' data-color='#E65100'>二条城 Nijō Castle</option>
+<option value='34.9874767,135.7594926' data-group='0' data-color='#E65100'>京都塔</option>
 <option value='34.982789,135.754422' data-group='0' data-color='#E65100'>AEON Mall KYOTO</option>
 <option value='35.004287,135.762009' data-group='0' data-color='#E65100'>大丸京都店 Daimaru Kyoto</option>
 <option value='35.003152,135.768211' data-group='0' data-color='#E65100'>髙島屋 Takashimaya Kyoto</option>
@@ -66,11 +71,13 @@
 <option value='34.9878845,135.7717126' data-group='0' data-color='#673AB7'>三十三間堂 Rengeoin Sanjusangendo</option>
 <option value='35.0214836,135.7942056' data-group='0' data-color='#0288D1'>哲学の道 Tetsugaku-no-michi</option>
 <option value='35.0271518,135.7978642' data-group='0' data-color='#0288D1'>銀閣寺 Ginkaku-ji Temple</option>
+<option value='35.126396,135.764517' data-group='0' data-color='#0288D1'>兵衛Hyoue</option>
+<option value='35.063264,135.785161' data-group='0' data-color='#0288D1'>国際会館駅 Kokusaikaikan Station</option>
+<option value='35.0174358,135.7887915' data-group='0' data-color='#0288D1'>岡崎神社 Okazaki Shrine</option>
+<option value='35.105953,135.763661' data-group='0' data-color='#0288D1'>貴船口駅 Kibuneguchi Station</option>
 <option value='35.039171,135.773011' data-group='0' data-color='#0288D1'>下鴨神社 Shimogamo-Jinja</option>
 <option value='35.0262444,135.7808218' data-group='0' data-color='#0288D1'>京都大学 Kyoto University</option>
-<option value='35.063264,135.785161' data-group='0' data-color='#0288D1'>国際会館駅 Kokusaikaikan Station</option>
-<option value='35.105953,135.763661' data-group='0' data-color='#0288D1'>貴船口駅 Kibuneguchi Station</option>
-<option value='35.126396,135.764517' data-group='0' data-color='#0288D1'>奥貴船 兵衛 Hyoue</option>
+<option value='35.0174358,135.7887915' data-group='0' data-color='#0288D1'>岡崎神社</option>
 <option value='35.0158275,135.673771' data-group='0' data-color='#4E342E'>天龍寺 Tenryu-ji</option>
 <option value='35.0177597,135.6742103' data-group='0' data-color='#4E342E'>野宮神社 Nonomiya Shrine</option>
 <option value='35.0176088,135.6743552' data-group='0' data-color='#4E342E'>嵯峨野 竹林の道 Chikurin</option>
@@ -110,6 +117,7 @@
 <option value='35.003673,135.77448' data-group='1' data-color='#673AB7'>(冰)祇園辻利</option>
 <option value='35.000533,135.7788273' data-group='1' data-color='#673AB7'>葫蘆親子丼</option>
 <option value='34.9983044,135.7807042' data-group='1' data-color='#673AB7'>(冰)Starbucks 二年坂 Yasaka Chaya</option>
+<option value='35.126396,135.764517' data-group='1' data-color='#0288D1'>奥貴船 兵衛 Hyoue</option>
 <option value='35.0169903,135.6772921' data-group='1' data-color='#4E342E'>(鰻)うなぎ屋廣川 Hirokawa</option>
 <option value='34.6889851,135.8398158' data-group='2' data-color='#F9A825'>東大寺 Tōdai-ji</option>
 <option value='34.4320024,135.2303939' data-group='3' data-color='#0288D1'>関西国際空港 Kansai International Airport</option>
@@ -129,6 +137,7 @@
 <option value='34.9914842,135.7517349' data-group='0' data-color='#E65100'>西本願寺 Nishihongan-ji Temple</option>
 <option value='34.9811177,135.7475964' data-group='0' data-color='#E65100'>東寺 Toji</option>
 <option value='35.0142299,135.748218' data-group='0' data-color='#E65100'>二条城 Nijō Castle</option>
+<option value='34.9874767,135.7594926' data-group='0' data-color='#E65100'>京都塔</option>
 <option value='34.982789,135.754422' data-group='0' data-color='#E65100'>AEON Mall KYOTO</option>
 <option value='35.004287,135.762009' data-group='0' data-color='#E65100'>大丸京都店 Daimaru Kyoto</option>
 <option value='35.003152,135.768211' data-group='0' data-color='#E65100'>髙島屋 Takashimaya Kyoto</option>
@@ -146,11 +155,13 @@
 <option value='34.9878845,135.7717126' data-group='0' data-color='#673AB7'>三十三間堂 Rengeoin Sanjusangendo</option>
 <option value='35.0214836,135.7942056' data-group='0' data-color='#0288D1'>哲学の道 Tetsugaku-no-michi</option>
 <option value='35.0271518,135.7978642' data-group='0' data-color='#0288D1'>銀閣寺 Ginkaku-ji Temple</option>
+<option value='35.126396,135.764517' data-group='0' data-color='#0288D1'>兵衛Hyoue</option>
+<option value='35.063264,135.785161' data-group='0' data-color='#0288D1'>国際会館駅 Kokusaikaikan Station</option>
+<option value='35.0174358,135.7887915' data-group='0' data-color='#0288D1'>岡崎神社 Okazaki Shrine</option>
+<option value='35.105953,135.763661' data-group='0' data-color='#0288D1'>貴船口駅 Kibuneguchi Station</option>
 <option value='35.039171,135.773011' data-group='0' data-color='#0288D1'>下鴨神社 Shimogamo-Jinja</option>
 <option value='35.0262444,135.7808218' data-group='0' data-color='#0288D1'>京都大学 Kyoto University</option>
-<option value='35.063264,135.785161' data-group='0' data-color='#0288D1'>国際会館駅 Kokusaikaikan Station</option>
-<option value='35.105953,135.763661' data-group='0' data-color='#0288D1'>貴船口駅 Kibuneguchi Station</option>
-<option value='35.126396,135.764517' data-group='0' data-color='#0288D1'>奥貴船 兵衛 Hyoue</option>
+<option value='35.0174358,135.7887915' data-group='0' data-color='#0288D1'>岡崎神社</option>
 <option value='35.0158275,135.673771' data-group='0' data-color='#4E342E'>天龍寺 Tenryu-ji</option>
 <option value='35.0177597,135.6742103' data-group='0' data-color='#4E342E'>野宮神社 Nonomiya Shrine</option>
 <option value='35.0176088,135.6743552' data-group='0' data-color='#4E342E'>嵯峨野 竹林の道 Chikurin</option>
@@ -190,6 +201,7 @@
 <option value='35.003673,135.77448' data-group='1' data-color='#673AB7'>(冰)祇園辻利</option>
 <option value='35.000533,135.7788273' data-group='1' data-color='#673AB7'>葫蘆親子丼</option>
 <option value='34.9983044,135.7807042' data-group='1' data-color='#673AB7'>(冰)Starbucks 二年坂 Yasaka Chaya</option>
+<option value='35.126396,135.764517' data-group='1' data-color='#0288D1'>奥貴船 兵衛 Hyoue</option>
 <option value='35.0169903,135.6772921' data-group='1' data-color='#4E342E'>(鰻)うなぎ屋廣川 Hirokawa</option>
 <option value='34.6889851,135.8398158' data-group='2' data-color='#F9A825'>東大寺 Tōdai-ji</option>
 <option value='34.4320024,135.2303939' data-group='3' data-color='#0288D1'>関西国際空港 Kansai International Airport</option>
@@ -245,6 +257,8 @@
       </div>
     </div>
 
+    <div id="map" class="container-fluid"></div>
+
     <script>
       var from_html = $('#from').html();
       var to_html = $('#to').html();
@@ -294,6 +308,17 @@
 
         $('#apple').empty().append(`<a href="${api_apple}" target="_blank">${href_text}</a>`);
         $('#google').empty().append(`<a href="${api_google}" target="_blank">${href_text}</a>`);
+      });
+
+      $('#from').on('change', function () {
+        var location = $(this).val();
+        var geocode = location.split(',');
+        if (geocode.length == 2) {
+          var map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: Number(geocode[0]), lng: Number(geocode[1])},
+            zoom: 17
+          });
+        }
       });
     </script>
   </body>
