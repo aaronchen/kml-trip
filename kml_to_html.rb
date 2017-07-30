@@ -132,6 +132,7 @@ html = <<-EOF
     <script>
       var from_html = $('#from').html();
       var to_html = $('#to').html();
+      var icon_colors = ['4E342E','0288D1','558B2F','673AB7','E65100'];
 
       $('.nav-pills a').on('click', function (event) {
         event.preventDefault();
@@ -184,8 +185,11 @@ html = <<-EOF
         var location = $(this).val();
         var geocode = location.split(',');
         var place_name = $(this).find('option:selected').text();
+        var color = $(this).find('option:selected').data('color');
         var place_id = $(this).find('option:selected').data('placeid') || '';
-        var color = $(this).find('option:selected').data('color') || 'E65100';
+
+        if (icon_colors.indexOf(color) < 0) { color = 'E65100'; }
+
         if (geocode.length == 2) {
           var map = new google.maps.Map($('#map')[0], {
             center: {lat: Number(geocode[0]), lng: Number(geocode[1])},
@@ -200,12 +204,12 @@ html = <<-EOF
                 var marker = new google.maps.Marker({
                   map: map,
                   position: place.geometry.location,
-                  image: {
-                    url: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + color,
-                    size: new google.maps.Size(71, 71),
+                  icon: {
+                    url: `images/icon-${color}.png`,
+                    size: new google.maps.Size(64, 64),
                     origin: new google.maps.Point(0, 0),
-                    anchor: new google.maps.Point(17, 34),
-                    scaledSize: new google.maps.Size(25, 25)
+                    anchor: new google.maps.Point(10, 34),
+                    scaledSize: new google.maps.Size(35, 35)
                   }
                 });
                 google.maps.event.addListener(marker, 'click', function() {
