@@ -15,9 +15,10 @@ doc.css('Folder').each_with_index do |folder, index|
   lists += "<li class='active'><a href='#' data-group='#{index}'>#{folder.at_css('name').children.text}</a></li>\n"
   folder.css('Placemark').each do |placemark|
     name = placemark.at_css('name').children.text
+    description = (placemark.at_css('description')&.children&.text&.split('PLACEID:') || [])[1]&.gsub(/<br>.*/, '')
     color = placemark.at_css('styleUrl').children.text.split('-')[2]
     coordinates = placemark.at_css('coordinates').children.text.strip.split(',')
-    options += "<option value='#{coordinates[1]},#{coordinates[0]}' data-group='#{index}' data-color='##{color}'>#{name}</option>\n"
+    options += "<option value='#{coordinates[1]},#{coordinates[0]}' data-group='#{index}' data-color='##{color}' data-placeid='#{description}'>#{name}</option>\n"
   end
 end
 
@@ -42,7 +43,7 @@ html = <<-EOF
 
     <style>
       .nav-pills { margin: 20px 0; }
-      .nav-pills > li > a { padding: 8px 10px; }
+      .nav-pills > li > a { padding: 5px 10px; }
       .btn { margin: 5px 0; }
       .label { background-color: #444; display: inline-block; margin: 10px 10px 0 0; padding: 4px 0; width: 45px; }
       .glyphicon-map-marker { color: #333; }
@@ -54,9 +55,9 @@ html = <<-EOF
 
   <body>
     <div class="container">
-      <h3>
+      <h4>
         <a href="https://www.google.com/maps/d/viewer?mid=#{mid}&hl=en&usp=sharing" target="_blank">#{title}</a>
-      </h3>
+      </h4>
 
       <ul class="nav nav-pills">
         #{lists}
@@ -182,11 +183,32 @@ html = <<-EOF
       $('#from').on('change', function () {
         var location = $(this).val();
         var geocode = location.split(',');
+        var place_name = $(this).find('option:selected').text();
+        var place_id = $(this).find('option:selected').data('placeid') || '';
         if (geocode.length == 2) {
           var map = new google.maps.Map($('#map')[0], {
             center: {lat: Number(geocode[0]), lng: Number(geocode[1])},
             zoom: 19
           });
+
+          if (place_id) {
+            var infowindow = new google.maps.InfoWindow();
+            var service = new google.maps.places.PlacesService(map);
+            service.getDetails({ placeId: place_id }, function (place, status) {
+              if (status == google.maps.places.PlacesServiceStatus.OK) {
+                var marker = new google.maps.Marker({
+                  map: map,
+                  position: place.geometry.location
+                });
+                google.maps.event.addListener(marker, 'click', function() {
+                  infowindow.setContent('<div><strong>' + place_name + '</strong><br>' +
+                    'Rating: <strong>' + place.rating + '</strong><br>' +
+                    '<a href="' + place.url + '" target="_blank">View in Google Map</a>' + '</div>');
+                  infowindow.open(map, this);
+                });
+              }
+            });
+          }
         } else {
           $('#map').empty();
         }
