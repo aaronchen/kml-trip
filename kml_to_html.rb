@@ -208,7 +208,7 @@ html = <<-EOF
                     url: `images/icon-${color}.png`,
                     size: new google.maps.Size(64, 64),
                     origin: new google.maps.Point(0, 0),
-                    anchor: new google.maps.Point(10, 34),
+                    anchor: new google.maps.Point(17, 34),
                     scaledSize: new google.maps.Size(35, 35)
                   }
                 });
