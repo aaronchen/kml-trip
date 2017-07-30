@@ -215,7 +215,7 @@ html = <<-EOF
                 google.maps.event.addListener(marker, 'click', function() {
                   infowindow.setContent('<div><strong>' + place_name + '</strong><br>' +
                     'Rating: <strong>' + place.rating + '</strong><br>' +
-                    '<a href="' + place.url + '" target="_blank">View in Google Maps</a>' + '</div>');
+                    '<a href="' + place.url + '" target="_blank">View on Google Maps</a>' + '</div>');
                   infowindow.open(map, this);
                 });
               }
