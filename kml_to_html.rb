@@ -18,7 +18,7 @@ doc.css('Folder').each_with_index do |folder, index|
     description = (placemark.at_css('description')&.children&.text&.split('PLACEID:') || [])[1]&.gsub(/<br>.*/, '')
     color = placemark.at_css('styleUrl').children.text.split('-')[2]
     coordinates = placemark.at_css('coordinates').children.text.strip.split(',')
-    options += "<option value='#{coordinates[1]},#{coordinates[0]}' data-group='#{index}' data-color='##{color}' data-placeid='#{description}'>#{name}</option>\n"
+    options += "<option value='#{coordinates[1]},#{coordinates[0]}' data-group='#{index}' data-color='#{color}' data-placeid='#{description}'>#{name}</option>\n"
   end
 end
 
@@ -161,10 +161,10 @@ html = <<-EOF
         var mode = $('[name="mode"]:checked').val();
         var href_text = `
           <span class="glyphicon glyphicon-map-marker"></span>
-          <span style='color: ${from_color};'>${from_text}</span>
+          <span style='color: #${from_color};'>${from_text}</span>
           &nbsp;<span class="glyphicon glyphicon-arrow-right"></span>&nbsp;
           <span class="glyphicon glyphicon-map-marker"></span>
-          <span style='color: ${to_color};'>${to_text}</span>
+          <span style='color: #${to_color};'>${to_text}</span>
         `;
 
         var mode_apple = 'r';
@@ -185,6 +185,7 @@ html = <<-EOF
         var geocode = location.split(',');
         var place_name = $(this).find('option:selected').text();
         var place_id = $(this).find('option:selected').data('placeid') || '';
+        var color = $(this).find('option:selected').data('color') || 'E65100';
         if (geocode.length == 2) {
           var map = new google.maps.Map($('#map')[0], {
             center: {lat: Number(geocode[0]), lng: Number(geocode[1])},
@@ -198,12 +199,19 @@ html = <<-EOF
               if (status == google.maps.places.PlacesServiceStatus.OK) {
                 var marker = new google.maps.Marker({
                   map: map,
-                  position: place.geometry.location
+                  position: place.geometry.location,
+                  image: {
+                    url: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + color,
+                    size: new google.maps.Size(71, 71),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(17, 34),
+                    scaledSize: new google.maps.Size(25, 25)
+                  }
                 });
                 google.maps.event.addListener(marker, 'click', function() {
                   infowindow.setContent('<div><strong>' + place_name + '</strong><br>' +
                     'Rating: <strong>' + place.rating + '</strong><br>' +
-                    '<a href="' + place.url + '" target="_blank">View in Google Map</a>' + '</div>');
+                    '<a href="' + place.url + '" target="_blank">View in Google Maps</a>' + '</div>');
                   infowindow.open(map, this);
                 });
               }
