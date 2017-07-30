@@ -65,7 +65,7 @@ html = <<-EOF
 
       <form class="form-horizontal">
         <div class="form-group">
-          <label class="col-sm-1 control-label" for="from">From 起點:</label>
+          <label class="col-sm-1 control-label" for="from">From:</label>
           <div class="col-sm-11">
             <select id="from" class="form-control">
               #{options}
@@ -74,7 +74,7 @@ html = <<-EOF
         </div>
 
         <div class="form-group">
-          <label class="col-sm-1 control-label" for="to">To 終點:</label>
+          <label class="col-sm-1 control-label" for="to">To:</label>
           <div class="col-sm-11">
             <select id="to" class="form-control">
               #{options}
@@ -132,7 +132,7 @@ html = <<-EOF
     <script>
       var from_html = $('#from').html();
       var to_html = $('#to').html();
-      var icon_colors = ['4E342E','0288D1','558B2F','673AB7','E65100'];
+      // var icon_colors = ['4E342E','0288D1','558B2F','673AB7','E65100'];
 
       $('.nav-pills a').on('click', function (event) {
         event.preventDefault();
@@ -185,10 +185,10 @@ html = <<-EOF
         var location = $(this).val();
         var geocode = location.split(',');
         var place_name = $(this).find('option:selected').text();
-        var color = $(this).find('option:selected').data('color');
+        // var color = $(this).find('option:selected').data('color');
         var place_id = $(this).find('option:selected').data('placeid') || '';
 
-        if (icon_colors.indexOf(color) < 0) { color = 'E65100'; }
+        // if (icon_colors.indexOf(color) < 0) { color = 'E65100'; }
 
         if (geocode.length == 2) {
           var map = new google.maps.Map($('#map')[0], {
@@ -204,13 +204,13 @@ html = <<-EOF
                 var marker = new google.maps.Marker({
                   map: map,
                   position: place.geometry.location,
-                  icon: {
-                    url: `images/icon-${color}.png`,
-                    size: new google.maps.Size(35, 35),
-                    origin: new google.maps.Point(0, 0),
-                    anchor: new google.maps.Point(17, 34),
-                    scaledSize: new google.maps.Size(35, 35)
-                  }
+                  // icon: {
+                  //   url: `images/icon-${color}.png`,
+                  //   size: new google.maps.Size(35, 35),
+                  //   origin: new google.maps.Point(0, 0),
+                  //   anchor: new google.maps.Point(17, 34),
+                  //   scaledSize: new google.maps.Size(35, 35)
+                  // }
                 });
                 google.maps.event.addListener(marker, 'click', function() {
                   infowindow.setContent('<div><strong>' + place_name + '</strong><br>' +
