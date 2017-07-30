@@ -65,7 +65,7 @@ html = <<-EOF
 
       <form class="form-horizontal">
         <div class="form-group">
-          <label class="col-sm-1 control-label" for="from">From:</label>
+          <label class="col-sm-1 control-label" for="from">From 起點:</label>
           <div class="col-sm-11">
             <select id="from" class="form-control">
               #{options}
@@ -74,7 +74,7 @@ html = <<-EOF
         </div>
 
         <div class="form-group">
-          <label class="col-sm-1 control-label" for="to">To:</label>
+          <label class="col-sm-1 control-label" for="to">To 終點:</label>
           <div class="col-sm-11">
             <select id="to" class="form-control">
               #{options}
