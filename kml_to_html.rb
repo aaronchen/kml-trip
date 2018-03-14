@@ -3,7 +3,8 @@
 require 'nokogiri'
 require 'open-uri'
 
-mid = '15vPov13dsFDc09OMAwruKQI5MjM'
+# mid = '15vPov13dsFDc09OMAwruKQI5MjM'
+mid = '12qPGjgW4a7xRZDtdBUCrNkcBK5-46YP8'
 
 doc = Nokogiri::XML(open("http://www.google.com/maps/d/kml?forcekml=1&mid=#{mid}"))
 
