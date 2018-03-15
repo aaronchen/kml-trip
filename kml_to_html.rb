@@ -37,7 +37,7 @@ html = <<-EOF
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="https://bootswatch.com/paper/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css">
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCikPtaGJr5nKhCpgqnjuwkDz33o94PAgM&libraries=places">
     </script>
@@ -66,8 +66,8 @@ html = <<-EOF
 
       <form class="form-horizontal">
         <div class="form-group">
-          <label class="col-sm-1 control-label" for="from">From:</label>
-          <div class="col-sm-11">
+          <label class="col-sm-1 col-xs-2 control-label" for="from">From:</label>
+          <div class="col-sm-11 col-xs-10">
             <select id="from" class="form-control">
               #{options}
             </select>
@@ -75,8 +75,8 @@ html = <<-EOF
         </div>
 
         <div class="form-group">
-          <label class="col-sm-1 control-label" for="to">To:</label>
-          <div class="col-sm-11">
+          <label class="col-sm-1 col-xs-2 control-label" for="to">To:</label>
+          <div class="col-sm-11 col-xs-10">
             <select id="to" class="form-control">
               #{options}
             </select>
@@ -84,7 +84,7 @@ html = <<-EOF
         </div>
 
         <div class="form-group">
-          <div class="col-sm-11 col-sm-offset-1">
+          <div class="col-sm-11 col-sm-offset-1 col-xs-10 col-xs-offset-2">
             <div class="radio">
               <label class="radio-inline">
                 <input type="radio" name="mode" value="1" checked> Transit
@@ -100,7 +100,7 @@ html = <<-EOF
         </div>
 
         <div class="form-group">
-          <div class="col-sm-11 col-sm-offset-1">
+          <div class="col-sm-12 col-xs-12">
             <button class="btn btn-primary btn-block" type="button" id="route">Route</button>
           </div>
         </div>
@@ -109,7 +109,7 @@ html = <<-EOF
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">
-            <span class="glyphicon glyphicon-screenshot"></span> Directions
+            <span class="glyphicon glyphicon-screenshot"></span> Map Directions
           </h3>
         </div>
         <div class="panel-body">
@@ -121,7 +121,7 @@ html = <<-EOF
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">
-            <span class="glyphicon glyphicon-exclamation-sign"></span> Information
+            <span class="glyphicon glyphicon-exclamation-sign"></span> Place Info
           </h3>
         </div>
         <div class="panel-body">
