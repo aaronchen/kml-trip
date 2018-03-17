@@ -51,6 +51,11 @@ html = <<-EOF
       .glyphicon-arrow-right { color: #999; }
       a:link, a:visited, a:visited:hover, a:hover, a:active { text-decoration: none; }
       #map { width: 100%; height: 300px; }
+      @media screen and (max-width: 576px) {
+        .control-label { font-size: 12px; font-weight: bold; padding: 8px 0 0 15px; }
+        .form-control { margin-left: 10px; width: 95%; }
+        .radio { margin-left: 10px; }
+      }
     </style>
   </head>
 
@@ -66,8 +71,8 @@ html = <<-EOF
 
       <form class="form-horizontal">
         <div class="form-group">
-          <label class="col-sm-1 col-xs-2 control-label" for="from">From:</label>
-          <div class="col-sm-11 col-xs-10">
+          <label class="col-sm-1 col-xs-1 control-label" for="from">From:</label>
+          <div class="col-sm-11 col-xs-11">
             <select id="from" class="form-control">
               #{options}
             </select>
@@ -75,8 +80,8 @@ html = <<-EOF
         </div>
 
         <div class="form-group">
-          <label class="col-sm-1 col-xs-2 control-label" for="to">To:</label>
-          <div class="col-sm-11 col-xs-10">
+          <label class="col-sm-1 col-xs-1 control-label" for="to">To:</label>
+          <div class="col-sm-11 col-xs-11">
             <select id="to" class="form-control">
               #{options}
             </select>
@@ -84,7 +89,7 @@ html = <<-EOF
         </div>
 
         <div class="form-group">
-          <div class="col-sm-11 col-sm-offset-1 col-xs-10 col-xs-offset-2">
+          <div class="col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
             <div class="radio">
               <label class="radio-inline">
                 <input type="radio" name="mode" value="1" checked> Transit

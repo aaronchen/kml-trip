@@ -25,6 +25,11 @@
       .glyphicon-arrow-right { color: #999; }
       a:link, a:visited, a:visited:hover, a:hover, a:active { text-decoration: none; }
       #map { width: 100%; height: 300px; }
+      @media screen and (max-width: 576px) {
+        .control-label { font-size: 12px; font-weight: bold; padding: 8px 0 0 15px; }
+        .form-control { margin-left: 10px; width: 95%; }
+        .radio { margin-left: 10px; }
+      }
     </style>
   </head>
 
@@ -43,31 +48,33 @@
 
       <form class="form-horizontal">
         <div class="form-group">
-          <label class="col-sm-1 col-xs-2 control-label" for="from">From:</label>
-          <div class="col-sm-11 col-xs-10">
+          <label class="col-sm-1 col-xs-1 control-label" for="from">From:</label>
+          <div class="col-sm-11 col-xs-11">
             <select id="from" class="form-control">
               
 <option value='' data-color='#d3a'>Current Location</option>
 <option value='35.7719867,140.3928501' data-group='0' data-color='0288D1' data-placeid='ChIJVze90XnzImARoRp3YqEpbtU'>成田国際空港 Narita International Airport</option>
 <option value='35.67732,139.7375' data-group='0' data-color='0288D1' data-placeid='ChIJKVgVLnmMGGARu74ltqPNZ30'>赤坂エクセルホテル東急 Akasaka-Excel Hotel-Tokyu</option>
-<option value='35.6851763,139.7100517' data-group='0' data-color='FFD600' data-placeid='ChIJPyOTG8KMGGARh_IXobWxHmo'>新宿御苑 Shinjuku Gyoen National Garden</option>
-<option value='35.6763976,139.6993259' data-group='0' data-color='FFD600' data-placeid='ChIJ5SZMmreMGGARcz8QSTiJyo8'>明治神宮 Meiji Jingu</option>
-<option value='35.6692268,139.7066984' data-group='0' data-color='FFD600' data-placeid='ChIJeYKTfqOMGGARnVPomEMKBDs'>Supreme Harajuku</option>
-<option value='35.6671757,139.7090417' data-group='0' data-color='FFD600' data-placeid='ChIJCx6jgqGMGGARpfB5UIap15k'>表参道ヒルズ Omotesando Hills</option>
-<option value='35.7330164,139.7465884' data-group='0' data-color='0F9D58' data-placeid='ChIJYUQ-972NGGAR5W_2E0N3SHY'>六義園 Rikugien Gardens</option>
+<option value='35.6851763,139.7100517' data-group='0' data-color='FBC02D' data-placeid='ChIJPyOTG8KMGGARh_IXobWxHmo'>新宿御苑 Shinjuku Gyoen National Garden</option>
+<option value='35.6763976,139.6993259' data-group='0' data-color='FBC02D' data-placeid='ChIJ5SZMmreMGGARcz8QSTiJyo8'>明治神宮 Meiji Jingu</option>
+<option value='35.6692268,139.7066984' data-group='0' data-color='FBC02D' data-placeid='ChIJeYKTfqOMGGARnVPomEMKBDs'>Supreme Harajuku</option>
+<option value='35.6671757,139.7090417' data-group='0' data-color='FBC02D' data-placeid='ChIJCx6jgqGMGGARpfB5UIap15k'>表参道ヒルズ Omotesando Hills</option>
 <option value='35.6896487,139.7486423' data-group='0' data-color='A52714' data-placeid='ChIJfT6_P26MGGAR9_Hw5CPoVnY'>千鳥ヶ淵 Chidorigafuchi</option>
 <option value='35.694136,139.743849' data-group='0' data-color='A52714' data-placeid='ChIJ1UOuDWiMGGARkM6Iv-ZU57U'>靖國神社 Yasukuni Shrine</option>
+<option value='35.7330164,139.7465884' data-group='0' data-color='9C27B0' data-placeid='ChIJYUQ-972NGGAR5W_2E0N3SHY'>六義園 Rikugien Gardens</option>
 <option value='35.7139388,139.7759441' data-group='0' data-color='9C27B0' data-placeid='ChIJd1iwN5yOGGARYcENjIntA7c'>上野恩賜公園 Ueno Park</option>
 <option value='35.7100627,139.8107004' data-group='0' data-color='9C27B0' data-placeid='ChIJZwBP-NaOGGARdCMux5eEaQU'>東京スカイツリー Tokyo Skytree</option>
 <option value='35.6816991,139.7699723' data-group='0' data-color='097138' data-placeid='ChIJmQtu8fyLGGARfj17QKxY7_c'>八重洲 Yaesu</option>
-<option value='35.629293,139.7760053' data-group='0' data-color='0288D1' data-placeid='ChIJVXii7faJGGARPVcqyWYjexM'>台場一丁目商店街</option>
-<option value='35.6278192,139.7735683' data-group='0' data-color='0288D1' data-placeid='ChIJL8dbO_aJGGARLNy0iz274cE'>AQUA CiTY ODAIBA</option>
-<option value='35.6250462,139.7754533' data-group='0' data-color='0288D1' data-placeid='ChIJpbpu0_mJGGARd9sJ-psh9Gc'>DiverCity Tokyo Plaza</option>
-<option value='35.6248726,139.7799373' data-group='0' data-color='0288D1' data-placeid='ChIJVVVpguCIGGARYZ0EGfIe_To'>VenusFort</option>
+<option value='35.629293,139.7760053' data-group='0' data-color='FF5252' data-placeid='ChIJVXii7faJGGARPVcqyWYjexM'>台場一丁目商店街</option>
+<option value='35.6278192,139.7735683' data-group='0' data-color='FF5252' data-placeid='ChIJL8dbO_aJGGARLNy0iz274cE'>AQUA CiTY ODAIBA</option>
+<option value='35.6250462,139.7754533' data-group='0' data-color='FF5252' data-placeid='ChIJpbpu0_mJGGARd9sJ-psh9Gc'>DiverCity Tokyo Plaza</option>
+<option value='35.6248726,139.7799373' data-group='0' data-color='FF5252' data-placeid='ChIJVVVpguCIGGARYZ0EGfIe_To'>VenusFort</option>
 <option value='35.4982343,138.7688431' data-group='0' data-color='757575' data-placeid='ChIJKb0xt4JgGWARMiVNZvDxq'>河口湖駅 Kawaguchiko Station</option>
 <option value='35.6729173,139.7358725' data-group='1' data-color='0288D1' data-placeid='ChIJn1_2uYCLGGAR75U8jUe8ii8'>梅丘寿司の美登利 総本店赤坂店 Sushi No Midori</option>
+<option value='35.668291,139.761609' data-group='1' data-color='0288D1' data-placeid='ChIJoVC4i-iLGGAR0Kf4glo399o'>【銀座比内や 本店】居酒屋/焼鳥/接待/宴会/個室</option>
 <option value='35.670028,139.767068' data-group='1' data-color='0288D1' data-placeid='ChIJoSAqKeeLGGARVzB_gTDUDCQ'>俺の焼肉 銀座4丁目</option>
 <option value='35.667714,139.759866' data-group='1' data-color='0288D1' data-placeid='ChIJ6-ajHemLGGARnfs8hcun6EM'>俺の焼肉 銀座9丁目</option>
+<option value='35.6946131,139.7016564' data-group='1' data-color='FBC02D' data-placeid='ChIJR7_stNmMGGARUDd3q_YGGME'>しろや新宿</option>
 <option value='35.7035207,139.753364' data-group='1' data-color='A52714' data-placeid='ChIJAR7nSz-MGGAR6LAJ6o_ASVI'>牛兵衛 草庵 東京ドームホテル店</option>
 <option value='35.6822892,139.7676622' data-group='1' data-color='097138' data-placeid='ChIJtxODuv6LGGARZ-eox7V3ahA'>Kajitsuen 果実園</option>
 <option value='35.6822802,139.7681402' data-group='1' data-color='097138' data-placeid='ChIJGeYlX_mLGGARrwnDb3I__yg'>米沢牛黄木 東京店 Kongoukaku</option>
@@ -77,31 +84,33 @@
         </div>
 
         <div class="form-group">
-          <label class="col-sm-1 col-xs-2 control-label" for="to">To:</label>
-          <div class="col-sm-11 col-xs-10">
+          <label class="col-sm-1 col-xs-1 control-label text-right" for="to">To:</label>
+          <div class="col-sm-11 col-xs-11">
             <select id="to" class="form-control">
               
 <option value='' data-color='#d3a'>Current Location</option>
 <option value='35.7719867,140.3928501' data-group='0' data-color='0288D1' data-placeid='ChIJVze90XnzImARoRp3YqEpbtU'>成田国際空港 Narita International Airport</option>
 <option value='35.67732,139.7375' data-group='0' data-color='0288D1' data-placeid='ChIJKVgVLnmMGGARu74ltqPNZ30'>赤坂エクセルホテル東急 Akasaka-Excel Hotel-Tokyu</option>
-<option value='35.6851763,139.7100517' data-group='0' data-color='FFD600' data-placeid='ChIJPyOTG8KMGGARh_IXobWxHmo'>新宿御苑 Shinjuku Gyoen National Garden</option>
-<option value='35.6763976,139.6993259' data-group='0' data-color='FFD600' data-placeid='ChIJ5SZMmreMGGARcz8QSTiJyo8'>明治神宮 Meiji Jingu</option>
-<option value='35.6692268,139.7066984' data-group='0' data-color='FFD600' data-placeid='ChIJeYKTfqOMGGARnVPomEMKBDs'>Supreme Harajuku</option>
-<option value='35.6671757,139.7090417' data-group='0' data-color='FFD600' data-placeid='ChIJCx6jgqGMGGARpfB5UIap15k'>表参道ヒルズ Omotesando Hills</option>
-<option value='35.7330164,139.7465884' data-group='0' data-color='0F9D58' data-placeid='ChIJYUQ-972NGGAR5W_2E0N3SHY'>六義園 Rikugien Gardens</option>
+<option value='35.6851763,139.7100517' data-group='0' data-color='FBC02D' data-placeid='ChIJPyOTG8KMGGARh_IXobWxHmo'>新宿御苑 Shinjuku Gyoen National Garden</option>
+<option value='35.6763976,139.6993259' data-group='0' data-color='FBC02D' data-placeid='ChIJ5SZMmreMGGARcz8QSTiJyo8'>明治神宮 Meiji Jingu</option>
+<option value='35.6692268,139.7066984' data-group='0' data-color='FBC02D' data-placeid='ChIJeYKTfqOMGGARnVPomEMKBDs'>Supreme Harajuku</option>
+<option value='35.6671757,139.7090417' data-group='0' data-color='FBC02D' data-placeid='ChIJCx6jgqGMGGARpfB5UIap15k'>表参道ヒルズ Omotesando Hills</option>
 <option value='35.6896487,139.7486423' data-group='0' data-color='A52714' data-placeid='ChIJfT6_P26MGGAR9_Hw5CPoVnY'>千鳥ヶ淵 Chidorigafuchi</option>
 <option value='35.694136,139.743849' data-group='0' data-color='A52714' data-placeid='ChIJ1UOuDWiMGGARkM6Iv-ZU57U'>靖國神社 Yasukuni Shrine</option>
+<option value='35.7330164,139.7465884' data-group='0' data-color='9C27B0' data-placeid='ChIJYUQ-972NGGAR5W_2E0N3SHY'>六義園 Rikugien Gardens</option>
 <option value='35.7139388,139.7759441' data-group='0' data-color='9C27B0' data-placeid='ChIJd1iwN5yOGGARYcENjIntA7c'>上野恩賜公園 Ueno Park</option>
 <option value='35.7100627,139.8107004' data-group='0' data-color='9C27B0' data-placeid='ChIJZwBP-NaOGGARdCMux5eEaQU'>東京スカイツリー Tokyo Skytree</option>
 <option value='35.6816991,139.7699723' data-group='0' data-color='097138' data-placeid='ChIJmQtu8fyLGGARfj17QKxY7_c'>八重洲 Yaesu</option>
-<option value='35.629293,139.7760053' data-group='0' data-color='0288D1' data-placeid='ChIJVXii7faJGGARPVcqyWYjexM'>台場一丁目商店街</option>
-<option value='35.6278192,139.7735683' data-group='0' data-color='0288D1' data-placeid='ChIJL8dbO_aJGGARLNy0iz274cE'>AQUA CiTY ODAIBA</option>
-<option value='35.6250462,139.7754533' data-group='0' data-color='0288D1' data-placeid='ChIJpbpu0_mJGGARd9sJ-psh9Gc'>DiverCity Tokyo Plaza</option>
-<option value='35.6248726,139.7799373' data-group='0' data-color='0288D1' data-placeid='ChIJVVVpguCIGGARYZ0EGfIe_To'>VenusFort</option>
+<option value='35.629293,139.7760053' data-group='0' data-color='FF5252' data-placeid='ChIJVXii7faJGGARPVcqyWYjexM'>台場一丁目商店街</option>
+<option value='35.6278192,139.7735683' data-group='0' data-color='FF5252' data-placeid='ChIJL8dbO_aJGGARLNy0iz274cE'>AQUA CiTY ODAIBA</option>
+<option value='35.6250462,139.7754533' data-group='0' data-color='FF5252' data-placeid='ChIJpbpu0_mJGGARd9sJ-psh9Gc'>DiverCity Tokyo Plaza</option>
+<option value='35.6248726,139.7799373' data-group='0' data-color='FF5252' data-placeid='ChIJVVVpguCIGGARYZ0EGfIe_To'>VenusFort</option>
 <option value='35.4982343,138.7688431' data-group='0' data-color='757575' data-placeid='ChIJKb0xt4JgGWARMiVNZvDxq'>河口湖駅 Kawaguchiko Station</option>
 <option value='35.6729173,139.7358725' data-group='1' data-color='0288D1' data-placeid='ChIJn1_2uYCLGGAR75U8jUe8ii8'>梅丘寿司の美登利 総本店赤坂店 Sushi No Midori</option>
+<option value='35.668291,139.761609' data-group='1' data-color='0288D1' data-placeid='ChIJoVC4i-iLGGAR0Kf4glo399o'>【銀座比内や 本店】居酒屋/焼鳥/接待/宴会/個室</option>
 <option value='35.670028,139.767068' data-group='1' data-color='0288D1' data-placeid='ChIJoSAqKeeLGGARVzB_gTDUDCQ'>俺の焼肉 銀座4丁目</option>
 <option value='35.667714,139.759866' data-group='1' data-color='0288D1' data-placeid='ChIJ6-ajHemLGGARnfs8hcun6EM'>俺の焼肉 銀座9丁目</option>
+<option value='35.6946131,139.7016564' data-group='1' data-color='FBC02D' data-placeid='ChIJR7_stNmMGGARUDd3q_YGGME'>しろや新宿</option>
 <option value='35.7035207,139.753364' data-group='1' data-color='A52714' data-placeid='ChIJAR7nSz-MGGAR6LAJ6o_ASVI'>牛兵衛 草庵 東京ドームホテル店</option>
 <option value='35.6822892,139.7676622' data-group='1' data-color='097138' data-placeid='ChIJtxODuv6LGGARZ-eox7V3ahA'>Kajitsuen 果実園</option>
 <option value='35.6822802,139.7681402' data-group='1' data-color='097138' data-placeid='ChIJGeYlX_mLGGARrwnDb3I__yg'>米沢牛黄木 東京店 Kongoukaku</option>
@@ -111,7 +120,7 @@
         </div>
 
         <div class="form-group">
-          <div class="col-sm-11 col-sm-offset-1 col-xs-10 col-xs-offset-2">
+          <div class="col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
             <div class="radio">
               <label class="radio-inline">
                 <input type="radio" name="mode" value="1" checked> Transit
