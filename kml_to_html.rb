@@ -10,6 +10,10 @@ file = ARGV[0] || 'index'
 # mid = '12qPGjgW4a7xRZDtdBUCrNkcBK5-46YP8' # Tokyo 2018
 mid = '1FmlAtBSVCKGcKnzRjE4NLhsIb0bTntBX' # Tainan
 
+# To find Place ID for POIs, go to:
+#   https://developers.google.com/places/place-id
+# Later, Edit POIs and put 'PLACEID:place_id' in POI description
+
 doc = Nokogiri::XML(
   open("http://www.google.com/maps/d/kml?forcekml=1&mid=#{mid}")
 )
