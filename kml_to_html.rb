@@ -1,11 +1,14 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 require 'nokogiri'
 require 'open-uri'
 
-# mid = '15vPov13dsFDc09OMAwruKQI5MjM'
-# mid = '12qPGjgW4a7xRZDtdBUCrNkcBK5-46YP8'
-mid = '1FmlAtBSVCKGcKnzRjE4NLhsIb0bTntBX'.freeze
+file = ARGV[0] || 'index'
+
+# mid = '15vPov13dsFDc09OMAwruKQI5MjM' # Tokyo 2017
+# mid = '12qPGjgW4a7xRZDtdBUCrNkcBK5-46YP8' # Tokyo 2018
+mid = '1FmlAtBSVCKGcKnzRjE4NLhsIb0bTntBX' # Tainan
 
 doc = Nokogiri::XML(
   open("http://www.google.com/maps/d/kml?forcekml=1&mid=#{mid}")
@@ -25,6 +28,7 @@ doc.css('Folder').each_with_index do |folder, index|
           </a>
         </li>
   )
+
   folder.css('Placemark').each do |placemark|
     name = placemark.at_css('name').children.text
     description = (
@@ -259,4 +263,4 @@ html = <<~HTMLDOC
   </html>
 HTMLDOC
 
-File.write('tainan.html', html)
+File.write("#{file}.html", html)
