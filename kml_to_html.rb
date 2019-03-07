@@ -54,7 +54,7 @@ doc.css('Folder').each_with_index do |folder, index|
   end
 end
 
-html = <<~HTMLDOC
+html = <<~HTML
   <!DOCTYPE html>
   <html lang="en">
     <head>
@@ -250,9 +250,13 @@ html = <<~HTMLDOC
                     // }
                   });
                   google.maps.event.addListener(marker, 'click', function() {
-                    infowindow.setContent('<div><strong>' + place_name + '</strong><br>' +
-                      'Rating: <strong>' + place.rating + '</strong><br>' +
-                      '<a href="' + place.url + '" target="_blank">View on Google Maps</a>' + '</div>');
+                    infowindow.setContent(`
+                      <div>
+                        <strong>${place_name}</strong><br />
+                        Rating: <strong>${place.rating}</strong><br />
+                        <a href="${place.url}" target="_blank">View on Google Maps</a>
+                      </div>
+                    `);
                     infowindow.open(map, this);
                   });
                 }
@@ -265,6 +269,6 @@ html = <<~HTMLDOC
       </script>
     </body>
   </html>
-HTMLDOC
+HTML
 
 File.write("#{file}.html", html)
