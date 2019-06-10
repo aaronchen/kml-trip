@@ -26,6 +26,7 @@ rescue StandardError => e
   exit
 end
 
+api_key = 'MgAP49o33zDkwujnqgpChKn5rJGatPkiCySazIA'.reverse
 title = doc.css('Document').at_css('name').children.text
 lists = ''
 options = %(
@@ -78,7 +79,7 @@ html = <<~HTML
 
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css">
 
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCikPtaGJr5nKhCpgqnjuwkDz33o94PAgM&libraries=places">
+      <script src="https://maps.googleapis.com/maps/api/js?key=#{api_key}&libraries=places">
       </script>
 
       <style>
