@@ -18,7 +18,7 @@ end
 
 begin
   doc = Nokogiri::XML(
-    open("http://www.google.com/maps/d/kml?forcekml=1&mid=#{mid}")
+    URI.open("https://www.google.com/maps/d/kml?forcekml=1&mid=#{mid}")
   )
 rescue StandardError => e
   puts "- Error: Cannot read mid: #{mid}"
