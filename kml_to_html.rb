@@ -3,6 +3,8 @@
 
 require 'nokogiri'
 require 'open-uri'
+require 'json'
+require 'net/http'
 
 mid = ARGV[0]
 file = ARGV[1]
@@ -15,6 +17,18 @@ end
 # To find Place ID for POIs, go to:
 #   https://developers.google.com/places/place-id
 # Later, Edit POIs and put 'PLACEID:place_id' in POI description
+
+def fetch_place_id(name, lat, lng, api_key)
+  url = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{lat},#{lng}&radius=100&type=point_of_interest&keyword=#{URI.encode_www_form_component(name)}&key=#{api_key}")
+  res = Net::HTTP.get_response(url)
+  if res.is_a?(Net::HTTPSuccess)
+    json = JSON.parse(res.body)
+    if json['results'] && json['results'][0] && json['results'][0]['place_id']
+      return json['results'][0]['place_id']
+    end
+  end
+  nil
+end
 
 begin
   doc = Nokogiri::XML(
@@ -49,6 +63,10 @@ doc.css('Folder').each_with_index do |folder, index|
     place_id = description_text[/place[\s_-]*id[:：]?\s*([A-Za-z0-9_-]+)/i, 1]
     color = placemark.at_css('styleUrl').children.text.split('-')[2]
     coordinates = placemark.at_css('coordinates').children.text.strip.split(',')
+    # If no place_id, try to fetch from Google Places API
+    if !place_id || place_id.empty?
+      place_id = fetch_place_id(name, coordinates[1], coordinates[0], api_key)
+    end
     options += %(
               <option value='#{coordinates[1]},#{coordinates[0]}'
                       data-group='#{index}'
