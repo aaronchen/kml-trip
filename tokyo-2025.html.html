@@ -5,13 +5,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
     <!-- Latest Google Maps JS API with callback -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCt6MJCC4v14LEdhjDFwseIjDJGt45MUfI&callback=initMap&libraries=places" async defer></script>
@@ -20,60 +19,60 @@
       .nav-pills { margin: 20px 0; }
       .nav-pills > li > a { padding: 5px 10px; }
       .btn { margin: 5px 0; }
-      .label { background-color: #444; display: inline-block; margin: 10px 10px 0 0; padding: 4px 0; width: 45px; }
+      .logo-label { font-size: 12px; font-weight: bold; padding: 2px 0; width: 88px; min-width: 88px; text-align: center; color: #fff; background-color: #333; border-radius: 3px; display: inline-block; }
+      .form-label { font-size: 14px; font-weight: bold; padding: 10px 0 0 15px; }
       .glyphicon-map-marker { color: #333; }
       .glyphicon-arrow-right { color: #999; }
       a:link, a:visited, a:visited:hover, a:hover, a:active { text-decoration: none; }
       #map { width: 100%; height: 300px; }
       @media screen and (max-width: 576px) {
-        .control-label { font-size: 12px; font-weight: bold; padding: 8px 0 0 15px; }
+        .form-label { font-size: 12px; font-weight: bold; padding: 8px 0 0 15px; }
         .form-control { margin-left: 10px; width: 95%; }
-        .radio { margin-left: 10px; }
       }
     </style>
   </head>
 
   <body>
-    <div class="container">
+    <div class="container my-4">
       <h4>
         <a href="https://www.google.com/maps/d/viewer?mid=1okxIZc1J4FmDdxV24XjRusrmD8Riqi0&hl=en&usp=sharing" target="_blank">Tokyo 2025</a>
       </h4>
 
-      <ul class="nav nav-pills">
+      <ul class="nav nav-pills nav-fill mb-3 gap-2" id="groupTabs" role="tablist">
         
-        <li class='active'>
-          <a href='#' data-group='0'>
+        <li class="nav-item">
+          <a class="nav-link active" href="#" data-group="0">
             東京 Tokyo
           </a>
         </li>
   
-        <li class='active'>
-          <a href='#' data-group='1'>
+        <li class="nav-item">
+          <a class="nav-link active" href="#" data-group="1">
             横浜市 Yokohama
           </a>
         </li>
   
       </ul>
 
-      <form class="form-horizontal">
-        <div class="form-group">
-          <label class="col-sm-1 col-xs-1 control-label" for="from">From:</label>
-          <div class="col-sm-11 col-xs-11">
-            <select id="from" class="form-control">
+      <form>
+        <div class="row mb-3 align-items-center">
+          <label class="col-sm-1 col-form-label" for="from">From:</label>
+          <div class="col-sm-11">
+            <select id="from" class="form-select">
               
               <option value="" data-color="#d3a">Current Location</option>
 
               <option value='35.770178,140.3843215'
                       data-group='0'
                       data-color='0288D1'
-                      data-placeid=''>
+                      data-placeid='ChIJVze90XnzImARoRp3YqEpbtU'>
                 成田国際空港 Narita International Airport
               </option>
     
               <option value='35.5482964,139.7779951'
                       data-group='0'
                       data-color='0288D1'
-                      data-placeid=''>
+                      data-placeid='ChIJ45IxpAtkGGAR3_hG0anDMg0'>
                 羽田空港 Haneda Airport
               </option>
     
@@ -340,24 +339,24 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label class="col-sm-1 col-xs-1 control-label" for="to">To:</label>
-          <div class="col-sm-11 col-xs-11">
-            <select id="to" class="form-control">
+        <div class="row mb-3 align-items-center">
+          <label class="col-sm-1 col-form-label" for="to">To:</label>
+          <div class="col-sm-11">
+            <select id="to" class="form-select">
               
               <option value="" data-color="#d3a">Current Location</option>
 
               <option value='35.770178,140.3843215'
                       data-group='0'
                       data-color='0288D1'
-                      data-placeid=''>
+                      data-placeid='ChIJVze90XnzImARoRp3YqEpbtU'>
                 成田国際空港 Narita International Airport
               </option>
     
               <option value='35.5482964,139.7779951'
                       data-group='0'
                       data-color='0288D1'
-                      data-placeid=''>
+                      data-placeid='ChIJ45IxpAtkGGAR3_hG0anDMg0'>
                 羽田空港 Haneda Airport
               </option>
     
@@ -624,48 +623,45 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <div class="col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
-            <div class="radio">
-              <label class="radio-inline">
-                <input type="radio" name="mode" value="1" checked> Transit
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="mode" value="2"> Driving
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="mode" value="3"> Walking
-              </label>
+        <div class="row mb-3">
+          <div class="col-sm-11 offset-sm-1">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="mode" id="mode1" value="1" checked>
+              <label class="form-check-label" for="mode1">Transit</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="mode" id="mode2" value="2">
+              <label class="form-check-label" for="mode2">Driving</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="mode" id="mode3" value="3">
+              <label class="form-check-label" for="mode3">Walking</label>
             </div>
           </div>
         </div>
 
-        <div class="form-group">
-          <div class="col-sm-12 col-xs-12">
-            <button class="btn btn-primary btn-block" type="button" id="route">Route</button>
+        <div class="row mb-3">
+          <div class="col-sm-12">
+            <button class="btn btn-primary w-100" type="button" id="route">Route</button>
           </div>
         </div>
       </form>
 
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">
-            <span class="glyphicon glyphicon-screenshot"></span> Map Directions
-          </h3>
+      <div class="card mb-3">
+        <div class="card-header">
+          <span class="bi bi-crosshair"></span> Map Directions
         </div>
-        <div class="panel-body">
-          <div><span class="label">Apple</span><span id="apple">No Route Yet</span></div>
-          <div><span class="label">Google</span><span id="google">No Route Yet</span></div>
+        <div class="card-body">
+          <div><span class="logo-label me-2"><i class="bi bi-apple"></i> Apple</span><span id="apple">No Route Yet</span></div>
+          <div><span class="logo-label me-2"><i class="bi bi-google"></i> Google</span><span id="google">No Route Yet</span></div>
         </div>
       </div>
 
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">
-            <span class="glyphicon glyphicon-exclamation-sign"></span> Place Info
-          </h3>
+      <div class="card">
+        <div class="card-header">
+          <span class="bi bi-exclamation-circle"></span> Place Info
         </div>
-        <div class="panel-body">
+        <div class="card-body">
           <div id="map"></div>
         </div>
       </div>
@@ -715,15 +711,15 @@
         }
       }
 
-      $('.nav-pills a').on('click', function (event) {
+      $('.nav-pills .nav-link').on('click', function (event) {
         event.preventDefault();
         var group = $(this).data('group');
-        $(this).closest('li').toggleClass('active');
+        $(this).toggleClass('active');
 
         $('#from').html(from_html).change();
         $('#to').html(to_html);
-        $('li:not([class^="active"])').each(function () {
-          var hide_group = $(this).find('a').data('group');
+        $('.nav-link:not(.active)').each(function () {
+          var hide_group = $(this).data('group');
           $(`option[data-group="${hide_group}"]`).remove();
         });
       });
@@ -742,10 +738,10 @@
         var to_color = $('#to option:selected').data('color');
         var mode = $('[name="mode"]:checked').val();
         var href_text = `
-          <span class="glyphicon glyphicon-map-marker"></span>
+          <span class="bi bi-geo-alt-fill" style="color: #${from_color};"></span>
           <span style='color: #${from_color};'>${from_text}</span>
-          &nbsp;<span class="glyphicon glyphicon-arrow-right"></span>&nbsp;
-          <span class="glyphicon glyphicon-map-marker"></span>
+          &nbsp;<span class="bi bi-arrow-right"></span>&nbsp;
+          <span class="bi bi-geo-alt-fill" style="color: #${to_color};"></span>
           <span style='color: #${to_color};'>${to_text}</span>
         `;
 
@@ -767,7 +763,6 @@
         var geocode = location.split(',');
         var place_name = $(this).find('option:selected').text();
         var place_id = $(this).find('option:selected').data('placeid') || '';
-
         if (geocode.length == 2 && geocode[0] && geocode[1]) {
           showPlaceOnMap(geocode[0], geocode[1], place_name, place_id);
         } else {
@@ -775,5 +770,7 @@
         }
       });
     </script>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   </body>
 </html>
