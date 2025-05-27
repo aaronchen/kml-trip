@@ -26,7 +26,7 @@ rescue StandardError => e
   exit
 end
 
-api_key = 'MgAP49o33zDkwujnqgpChKn5rJGatPkiCySazIA'.reverse
+api_key = 'AIzaSyCt6MJCC4v14LEdhjDFwseIjDJGt45MUfI'
 title = doc.css('Document').at_css('name').children.text
 lists = ''
 options = %(
@@ -79,8 +79,8 @@ html = <<~HTML
 
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css">
 
-      <script src="https://maps.googleapis.com/maps/api/js?key=#{api_key}&libraries=places">
-      </script>
+      <!-- Latest Google Maps JS API with callback -->
+      <script src="https://maps.googleapis.com/maps/api/js?key=#{api_key}&callback=initMap&libraries=places" async defer></script>
 
       <style>
         .nav-pills { margin: 20px 0; }
@@ -178,7 +178,46 @@ html = <<~HTML
       <script>
         var from_html = $('#from').html();
         var to_html = $('#to').html();
-        // var icon_colors = ['4E342E','0288D1','558B2F','673AB7','E65100'];
+        var map, marker, infowindow, service;
+
+        function initMap() {
+          // Default map center
+          map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 35.6895, lng: 139.6917}, // Tokyo
+            zoom: 10
+          });
+          infowindow = new google.maps.InfoWindow();
+          service = new google.maps.places.PlacesService(map);
+        }
+
+        function showPlaceOnMap(lat, lng, place_name, place_id) {
+          if (!map) return;
+          var position = {lat: Number(lat), lng: Number(lng)};
+          map.setCenter(position);
+          map.setZoom(19);
+          if (marker) marker.setMap(null);
+          marker = new google.maps.Marker({
+            map: map,
+            position: position
+          });
+          if (place_id) {
+            service.getDetails({ placeId: place_id }, function (place, status) {
+              if (status === google.maps.places.PlacesServiceStatus.OK) {
+                google.maps.event.clearListeners(marker, 'click');
+                google.maps.event.addListener(marker, 'click', function() {
+                  infowindow.setContent(`
+                    <div>
+                      <strong>${place_name}</strong><br />
+                      Rating: <strong>${place.rating || 'N/A'}</strong><br />
+                      <a href="${place.url}" target="_blank">View on Google Maps</a>
+                    </div>
+                  `);
+                  infowindow.open(map, marker);
+                });
+              }
+            });
+          }
+        }
 
         $('.nav-pills a').on('click', function (event) {
           event.preventDefault();
@@ -231,48 +270,12 @@ html = <<~HTML
           var location = $(this).val();
           var geocode = location.split(',');
           var place_name = $(this).find('option:selected').text();
-          // var color = $(this).find('option:selected').data('color');
           var place_id = $(this).find('option:selected').data('placeid') || '';
 
-          // if (icon_colors.indexOf(color) < 0) { color = 'E65100'; }
-
-          if (geocode.length == 2) {
-            var map = new google.maps.Map($('#map')[0], {
-              center: {lat: Number(geocode[0]), lng: Number(geocode[1])},
-              zoom: 19
-            });
-
-            if (place_id) {
-              var infowindow = new google.maps.InfoWindow();
-              var service = new google.maps.places.PlacesService(map);
-              service.getDetails({ placeId: place_id }, function (place, status) {
-                if (status == google.maps.places.PlacesServiceStatus.OK) {
-                  var marker = new google.maps.Marker({
-                    map: map,
-                    position: place.geometry.location,
-                    // icon: {
-                    //   url: `images/icon-${color}.png`,
-                    //   size: new google.maps.Size(35, 35),
-                    //   origin: new google.maps.Point(0, 0),
-                    //   anchor: new google.maps.Point(17, 34),
-                    //   scaledSize: new google.maps.Size(35, 35)
-                    // }
-                  });
-                  google.maps.event.addListener(marker, 'click', function() {
-                    infowindow.setContent(`
-                      <div>
-                        <strong>${place_name}</strong><br />
-                        Rating: <strong>${place.rating}</strong><br />
-                        <a href="${place.url}" target="_blank">View on Google Maps</a>
-                      </div>
-                    `);
-                    infowindow.open(map, this);
-                  });
-                }
-              });
-            }
+          if (geocode.length == 2 && geocode[0] && geocode[1]) {
+            showPlaceOnMap(geocode[0], geocode[1], place_name, place_id);
           } else {
-            $('#map').empty();
+            if (marker) marker.setMap(null);
           }
         });
       </script>
