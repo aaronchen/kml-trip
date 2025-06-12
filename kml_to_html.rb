@@ -5,6 +5,9 @@ require 'nokogiri'
 require 'open-uri'
 require 'json'
 require 'net/http'
+require 'dotenv'
+
+Dotenv.load
 
 mid = ARGV[0]
 file = ARGV[1]
@@ -40,7 +43,8 @@ rescue StandardError => e
   exit
 end
 
-api_key = 'AIzaSyCt6MJCC4v14LEdhjDFwseIjDJGt45MUfI'
+api_key = ENV['GOOGLE_MAPS_API_KEY']
+api_key_restricted = ENV['GOOGLE_MAPS_API_KEY_RESTRICTED']
 title = doc.css('Document').at_css('name').children.text
 lists = ''
 options = %(
@@ -94,7 +98,7 @@ html = <<~HTML
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
       <!-- Latest Google Maps JS API with callback -->
-      <script src="https://maps.googleapis.com/maps/api/js?key=#{api_key}&callback=initMap&libraries=places" async defer></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=#{api_key_restricted}&callback=initMap&libraries=places" async defer></script>
 
       <style>
         .nav-pills { margin: 20px 0; }
