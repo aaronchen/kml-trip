@@ -58,21 +58,21 @@ doc.css('Style').each do |style|
     if icon_style
       icon_url = icon_style.at_css('Icon href')&.text
       kml_color = icon_style.at_css('color')&.text
-      
+
       # Convert KML ABGR color to RGB hex
       rgb_color = if kml_color && kml_color.length == 8
         # KML format: AABBGGRR -> #RRGGBB
         r = kml_color[6,2]
-        g = kml_color[4,2] 
+        g = kml_color[4,2]
         b = kml_color[2,2]
         "##{r}#{g}#{b}".upcase
       else
         nil
       end
-      
+
       # Extract icon number from style ID (e.g., "icon-1504-0288D1-normal" -> "1504")
       icon_number = style_id[/icon-(\d+)/, 1]
-      
+
       styles[style_id] = {
         icon_url: icon_url,
         kml_color: kml_color,
@@ -86,10 +86,10 @@ end
 # Then, map StyleMaps to their normal styles
 doc.css('StyleMap').each do |style_map|
   style_map_id = style_map['id']
-  normal_style_url = style_map.css('Pair').find { |pair| 
-    pair.at_css('key')&.text == 'normal' 
+  normal_style_url = style_map.css('Pair').find { |pair|
+    pair.at_css('key')&.text == 'normal'
   }&.at_css('styleUrl')&.text&.gsub('#', '')
-  
+
   if style_map_id && normal_style_url && styles[normal_style_url]
     styles[style_map_id] = styles[normal_style_url]
   end
@@ -114,25 +114,24 @@ doc.css('Folder').each_with_index do |folder, index|
     description_text = placemark.at_css('description')&.text || ''
     # Extract Place ID in any of these forms: PLACEID: ChIJ..., Place ID: ChIJ..., PlaceID: ChIJ..., etc.
     place_id = description_text[/place[\s_-]*id[:：]?\s*([A-Za-z0-9_-]+)/i, 1]
-    
+
     # Get style information
     style_url = placemark.at_css('styleUrl')&.text&.gsub('#', '')
     style_info = styles[style_url] || {}
-    
+
     # Use RGB color from KML, fallback to extracting from styleUrl
     color = style_info[:rgb_color] || (style_url ? "##{style_url.split('-')[2]}" : 'default')
     icon_url = style_info[:icon_url]
     icon_number = style_info[:icon_number]
-    
+
     coordinates = placemark.at_css('coordinates').children.text.strip.split(',')
     # If no place_id, try to fetch from Google Places API
     if !place_id || place_id.empty?
       place_id = fetch_place_id(name, coordinates[1], coordinates[0], api_key)
     end
     # Create visual color indicator for the option text
-    color_indicator = color && color != 'default' ? "●" : "○"
-    display_name = "#{color_indicator} #{name}"
-    
+    display_name = name
+
     options += %(
               <option value='#{coordinates[1]},#{coordinates[0]}'
                       data-group='#{index}'
@@ -176,12 +175,12 @@ html = <<~HTML
         #map { width: 100%; height: 300px; }
         .poi-icon { width: 16px; height: 16px; margin-right: 5px; vertical-align: middle; }
         .option-with-icon { display: flex; align-items: center; }
-        .color-indicator { 
-          display: inline-block; 
-          width: 12px; 
-          height: 12px; 
-          border-radius: 50%; 
-          margin-right: 8px; 
+        .color-indicator {
+          display: inline-block;
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          margin-right: 8px;
           border: 1px solid #ccc;
           vertical-align: middle;
         }
@@ -274,7 +273,7 @@ html = <<~HTML
           // Get the first POI coordinates for map center, fallback to Tokyo
           var initialCenter = {lat: 35.6895, lng: 139.6917}; // Tokyo default
           var firstPOI = $('#from option[value!=""]').first();
-          
+
           if (firstPOI.length > 0) {
             var coords = firstPOI.val().split(',');
             if (coords.length === 2 && coords[0] && coords[1]) {
@@ -284,7 +283,7 @@ html = <<~HTML
               };
             }
           }
-          
+
           map = new google.maps.Map(document.getElementById('map'), {
             center: initialCenter,
             zoom: 10,
@@ -330,26 +329,32 @@ html = <<~HTML
           });
         }
 
-        // Create a colored marker element for AdvancedMarkerElement
-        function createColoredMarkerElement(color, iconNumber) {
+        // Create a simple colored marker element
+        function createColoredMarkerElement(color, iconNumber, iconUrl) {
           if (!color || color === 'default') {
             return null; // Use default marker
           }
-          
-          // Create HTML element for the marker
+
           const markerElement = document.createElement('div');
-          markerElement.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="40" viewBox="0 0 24 40">
-              <path d="M12 0C5.4 0 0 5.4 0 12c0 9 12 28 12 28s12-19 12-28c0-6.6-5.4-12-12-12z" fill="${color}"/>
-              <circle cx="12" cy="12" r="6" fill="white"/>
-            </svg>
-          `;
           markerElement.style.cursor = 'pointer';
-          
+          markerElement.style.display = 'flex';
+          markerElement.style.alignItems = 'center';
+          markerElement.style.justifyContent = 'center';
+
+          // Bootstrap icon marker with KML color
+          markerElement.innerHTML = `
+            <i class="bi bi-pin-map-fill" style="
+              font-size: 32px;
+              color: ${color};
+              text-shadow: 1px 1px 2px rgba(0,0,0,0.5), -1px -1px 2px rgba(255,255,255,0.8);
+              filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+            "></i>
+          `;
+
           return markerElement;
         }
 
-        function showPlaceOnMap(lat, lng, place_name, place_id, color, icon_number) {
+        function showPlaceOnMap(lat, lng, place_name, place_id, color, icon_number, icon_url) {
           if (!map) return;
           var position = {lat: Number(lat), lng: Number(lng)};
           map.setCenter(position);
@@ -358,24 +363,24 @@ html = <<~HTML
             marker.map = null; // Remove previous marker
             marker = null;
           }
-          
+
           // Create custom marker element
-          var markerContent = createColoredMarkerElement(color, icon_number);
-          
+          var markerContent = createColoredMarkerElement(color, icon_number, icon_url);
+
           // Create AdvancedMarkerElement
           marker = new google.maps.marker.AdvancedMarkerElement({
             map: map,
             position: position,
             content: markerContent
           });
-          
+
           if (place_id) {
             // Use new Places API
             const place = new google.maps.places.Place({
               id: place_id,
               requestedLanguage: 'en'
             });
-            
+
             // Fetch place details using the new API
             place.fetchFields({
               fields: ['displayName', 'rating', 'googleMapsURI', 'websiteURI']
@@ -417,7 +422,7 @@ html = <<~HTML
           event.preventDefault();
           var group = $(this).data('group');
           $(this).toggleClass('active');
-          
+
           saveSelections();
           updateOptionsDisplay();
         });
@@ -463,8 +468,9 @@ html = <<~HTML
           var place_id = $(this).find('option:selected').data('placeid') || '';
           var color = $(this).find('option:selected').data('color') || '';
           var icon_number = $(this).find('option:selected').data('icon-number') || '';
+          var icon_url = $(this).find('option:selected').data('icon-url') || '';
           if (geocode.length == 2 && geocode[0] && geocode[1]) {
-            showPlaceOnMap(geocode[0], geocode[1], place_name, place_id, color, icon_number);
+            showPlaceOnMap(geocode[0], geocode[1], place_name, place_id, color, icon_number, icon_url);
           } else {
             if (marker) {
               marker.map = null;
