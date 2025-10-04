@@ -12,6 +12,11 @@
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
+    <!-- Choices.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+    <!-- Choices.js JS -->
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
     <!-- Latest Google Maps JS API with callback -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCt6MJCC4v14LEdhjDFwseIjDJGt45MUfI&callback=initMap&libraries=places,marker&loading=async" async defer></script>
 
@@ -36,6 +41,62 @@
         border: 1px solid #ccc;
         vertical-align: middle;
       }
+
+      /* Choices.js Bootstrap 5 theming */
+      .choices {
+        margin-bottom: 0;
+      }
+      .choices__inner {
+        background-color: #fff;
+        border: 1px solid #dee2e6;
+        border-radius: 0.375rem;
+        font-size: 1rem;
+        min-height: 38px;
+        padding: 0.375rem 0.75rem;
+      }
+      .choices__inner:focus-within {
+        border-color: #86b7fe;
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+      }
+      .choices__list--dropdown {
+        border: 1px solid #dee2e6;
+        border-radius: 0.375rem;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+      }
+      .choices__list--dropdown .choices__item--selectable {
+        padding: 0.5rem 1rem;
+      }
+      .choices__list--dropdown .choices__item--selectable.is-highlighted {
+        background-color: #0d6efd !important;
+        color: #fff !important;
+      }
+      .choices[data-type*=select-one] .choices__inner {
+        padding-bottom: 0.375rem;
+      }
+
+      /* Custom icon display in Choices.js using Google Maps individual icons */
+      .choices__item--choice .poi-icon,
+      .choices__item .poi-icon {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        margin-right: 8px;
+        vertical-align: middle;
+      }
+
+      /* Bootstrap icon styling for Current Location */
+      .poi-icon-bootstrap {
+        display: inline-block;
+        width: 20px;
+        margin-right: 8px;
+        font-size: 16px;
+        color: #6c757d;
+        text-align: center;
+        line-height: 1;
+        vertical-align: text-bottom;
+      }
+
       @media screen and (max-width: 576px) {
         .form-label { font-size: 12px; font-weight: bold; padding: 8px 0 0 15px; }
         .form-control { margin-left: 10px; width: 95%; }
@@ -89,744 +150,876 @@
           <div class="col-sm-11">
             <select id="from" class="form-select">
               
-              <option value="" data-color="#d3a">Current Location</option>
+              <option value="" data-color="#d3a" data-custom-properties='{"iconUrl":"bootstrap-icon"}'>Current Location</option>
 
               <option value='34.4319994,135.2366019'
                       data-group='0'
                       data-color='#0288D1'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1504-airport-plane_4x.png&highlight=0288D1,ff000000&scale=1.0'
                       data-icon-number='1504'
-                      data-placeid='ChIJ9_rNIxO5AGARiI-QjZ-ncfE'>
+                      data-placeid='ChIJ9_rNIxO5AGARiI-QjZ-ncfE'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1504-airport-plane_4x.png&highlight=0288D1,ff000000&scale=1.0","iconNumber":"1504","color":"#0288D1"}'>
                 関西国際空港 Kansai International Airport
               </option>
     
               <option value='34.7335716,135.4985691'
                       data-group='0'
                       data-color='#0288D1'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=0288D1,ff000000&scale=1.0'
                       data-icon-number='1716'
-                      data-placeid='ChIJSc4SbDnkAGARz3YQv-DE1zs'>
+                      data-placeid='ChIJSc4SbDnkAGARz3YQv-DE1zs'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=0288D1,ff000000&scale=1.0","iconNumber":"1716","color":"#0288D1"}'>
                 新大阪駅 Shin-Osaka Station
               </option>
     
               <option value='34.6634525,133.9173328'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1602-hotel-bed_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1602'
-                      data-placeid='ChIJnxFPKk0GVDURmuifpSR-5mk'>
+                      data-placeid='ChIJnxFPKk0GVDURmuifpSR-5mk'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1602-hotel-bed_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1602","color":"#9C27B0"}'>
                 Mitsui Garden Hotel Okayama
               </option>
     
               <option value='34.6602202,133.9233973'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJ4XlrVvMHVDURpN9tlQ6fjnY'>
-                Osteria la Ricetta 10/21
+                      data-placeid=''
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1577","color":"#9C27B0"}'>
+                [10/21] Osteria la Ricetta
               </option>
     
               <option value='34.6637518,133.9218645'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJ3a3Gd0sGVDURV96beKdN2Kk'>
-                Duomo 10/22
+                      data-placeid=''
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1577","color":"#9C27B0"}'>
+                [10/22] Duomo
               </option>
     
               <option value='34.6639837,133.921914'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJ_3z7ZLsHVDURA9iZlgb5oaE'>
-                TRONC トロン 10/23
+                      data-placeid=''
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1577","color":"#9C27B0"}'>
+                [10/23] TRONC トロン
               </option>
     
               <option value='34.6661212,133.9177335'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1716'
-                      data-placeid='ChIJ04njPUwGVDURV885IqoD16I'>
+                      data-placeid='ChIJ04njPUwGVDURV885IqoD16I'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1716","color":"#9C27B0"}'>
                 岡山駅 Okayama Station
               </option>
     
               <option value='34.6651878,133.9360657'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1598-historic-building_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1598'
-                      data-placeid='ChIJER_WDSUGVDURujV4pMtef44'>
+                      data-placeid='ChIJER_WDSUGVDURujV4pMtef44'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1598-historic-building_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1598","color":"#9C27B0"}'>
                 岡山城 Okayama Castle
               </option>
     
               <option value='34.6673339,133.93617'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1598-historic-building_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1598'
-                      data-placeid='ChIJhwt8jCQGVDURabQ6FPH0nXQ'>
+                      data-placeid='ChIJhwt8jCQGVDURabQ6FPH0nXQ'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1598-historic-building_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1598","color":"#9C27B0"}'>
                 岡山後楽園 Okayama Korakuen
               </option>
     
               <option value='34.6672375,133.9372488'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1899'
-                      data-placeid='ChIJdbc4IpoHVDURd6_GH_1KRnA'>
+                      data-placeid='ChIJdbc4IpoHVDURd6_GH_1KRnA'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1899","color":"#9C27B0"}'>
                 千入の森 Chishio-no-Mori Grove
               </option>
     
               <option value='34.6768634,133.8640841'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1598-historic-building_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1598'
-                      data-placeid='ChIJSeyCvM0AVDURl4DW7BR-cBw'>
+                      data-placeid='ChIJSeyCvM0AVDURl4DW7BR-cBw'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1598-historic-building_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1598","color":"#9C27B0"}'>
                 吉備津彦神社 Kibitsuhiko Shrine
               </option>
     
               <option value='34.659175,133.9728028'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1899'
-                      data-placeid='ChIJ5RP8ztwIVDUR12H7AhuNEqU'>
+                      data-placeid='ChIJ5RP8ztwIVDUR12H7AhuNEqU'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1899","color":"#9C27B0"}'>
                 曹源寺 Sogen Temple
               </option>
     
               <option value='34.6661733,133.9194993'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJvZ9MD0wGVDURRO5K45ehtoE'>
+                      data-placeid='ChIJvZ9MD0wGVDURRO5K45ehtoE'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1684","color":"#9C27B0"}'>
                 岡山駅前商店街 Okayama Ekimae Shopping Street
               </option>
     
               <option value='34.6652401,133.9185859'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJqQpMMU0GVDURqYP83ojGKIE'>
+                      data-placeid='ChIJqQpMMU0GVDURqYP83ojGKIE'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1684","color":"#9C27B0"}'>
                 岡山一番街 Okayama Ichibangai
               </option>
     
               <option value='34.6620824,133.9177261'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJkyqZELMHVDUREhwbsCvO-I0'>
+                      data-placeid='ChIJkyqZELMHVDUREhwbsCvO-I0'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1684","color":"#9C27B0"}'>
                 AEON Mall Okayama
               </option>
     
               <option value='34.6691294,133.9245496'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJ3ZQcRhEHVDURGeLxHgKk8x4'>
+                      data-placeid='ChIJ3ZQcRhEHVDURGeLxHgKk8x4'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1577","color":"#9C27B0"}'>
                 400℃ Pizza
               </option>
     
               <option value='34.665429,133.9179997'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJbY-XI00GVDURSBrGhbRSxWc'>
+                      data-placeid='ChIJbY-XI00GVDURSBrGhbRSxWc'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1577","color":"#9C27B0"}'>
                 吾妻寿司 Azuma Sushi Sun Station Terrace Okayama shop
               </option>
     
               <option value='34.6695904,133.9142703'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJfVGm8VEGVDURIyukP3CtWto'>
+                      data-placeid='ChIJfVGm8VEGVDURIyukP3CtWto'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1577","color":"#9C27B0"}'>
                 焼肉割烹J's苑 Yakiniku J's En
               </option>
     
               <option value='34.6690934,133.9209575'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJYaU-3UgGVDURQsvNzGYTlhQ'>
+                      data-placeid='ChIJYaU-3UgGVDURQsvNzGYTlhQ'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1577","color":"#9C27B0"}'>
                 肉のほそだ Sukiyaki Shabu Shabu House of Hosoda
               </option>
     
               <option value='34.6623661,133.9214402'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJUS_VPUsGVDURBEV5JpWzMeM'>
+                      data-placeid='ChIJUS_VPUsGVDURBEV5JpWzMeM'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1577","color":"#9C27B0"}'>
                 お好み焼 幸 Sachi Okonomiyaki Restaurant
               </option>
     
               <option value='34.6696567,133.9178779'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJxySz_U4GVDUR3ExlIO57eEs'>
+                      data-placeid='ChIJxySz_U4GVDUR3ExlIO57eEs'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1577","color":"#9C27B0"}'>
                 お好み焼きもり Mori
               </option>
     
               <option value='34.6594578,133.9203096'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJczDjRUYHVDURtEc6YY-v_NY'>
+                      data-placeid='ChIJczDjRUYHVDURtEc6YY-v_NY'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1577","color":"#9C27B0"}'>
                 焼肉 千祥 Kanzenkoshitsu Yakiniku Senshoh Yanagimachiten
               </option>
     
               <option value='34.6645627,133.9299301'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
-                      data-icon-number='1577'
-                      data-placeid='ChIJN8U-jqgHVDURRKTIKNK3D7w'>
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=9C27B0,ff000000&scale=1.0'
+                      data-icon-number='1534'
+                      data-placeid='ChIJN8U-jqgHVDURRKTIKNK3D7w'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1534","color":"#9C27B0"}'>
                 一鳥目 Itchōme
               </option>
     
               <option value='34.6019289,133.7657774'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1716'
-                      data-placeid='ChIJrxy5kkNWUTURZTQqL8CoiTA'>
+                      data-placeid='ChIJrxy5kkNWUTURZTQqL8CoiTA'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1716","color":"#097138"}'>
                 倉敷駅 Kurashiki Station
               </option>
     
               <option value='34.5988063,133.7698235'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJk2luPkdWUTURqnO2E5CuwDY'>
+                      data-placeid='ChIJk2luPkdWUTURqnO2E5CuwDY'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1684","color":"#097138"}'>
                 倉敷えびす通商店街 Yebisu Shopping Mall
               </option>
     
               <option value='34.5990711,133.7704081'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJH-mOMJRXUTUR5Kc3AMFMOVc'>
+                      data-placeid='ChIJH-mOMJRXUTUR5Kc3AMFMOVc'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1577","color":"#097138"}'>
                 ことりふらっと
               </option>
     
               <option value='34.5992707,133.7704114'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJ7fkq7WlWUTUR_xEF7XEf89s'>
+                      data-placeid='ChIJ7fkq7WlWUTUR_xEF7XEf89s'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1577","color":"#097138"}'>
                 月のうつわ Tsuki-no Utsuwa
               </option>
     
               <option value='34.598745,133.7699451'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJXZMeO0dWUTURBt0BopNwrZc'>
+                      data-placeid='ChIJXZMeO0dWUTURBt0BopNwrZc'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1577","color":"#097138"}'>
                 肉のいろは 阿知店 Iroha
               </option>
     
               <option value='34.59844,133.770267'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJY4mOPkdWUTUR3_50UjuhmPw'>
+                      data-placeid='ChIJY4mOPkdWUTUR3_50UjuhmPw'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1577","color":"#097138"}'>
                 えびす饅頭 Ebisu Manju
               </option>
     
               <option value='34.5974443,133.7704574'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1534'
-                      data-placeid='ChIJuzTaDEdWUTURFZR0lu8yUd4'>
+                      data-placeid='ChIJuzTaDEdWUTURFZR0lu8yUd4'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1534","color":"#097138"}'>
                 Cafe Gewa
               </option>
     
               <option value='34.5973317,133.7704033'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJN0tWC0dWUTUR84Fbiwb3rBo'>
+                      data-placeid='ChIJN0tWC0dWUTUR84Fbiwb3rBo'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1684","color":"#097138"}'>
                 林源十郎商店 Hayashi Genjuro Shouten
               </option>
     
               <option value='34.5974817,133.7734765'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1899'
-                      data-placeid='ChIJm4wn0DhWUTURnE-3zlklpf8'>
+                      data-placeid='ChIJm4wn0DhWUTURnE-3zlklpf8'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1899","color":"#097138"}'>
                 阿智神社 Achi Shrine
               </option>
     
               <option value='34.5967521,133.7753184'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJa8XaSTlWUTURQ8uhd8ztGss'>
+                      data-placeid='ChIJa8XaSTlWUTURQ8uhd8ztGss'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1684","color":"#097138"}'>
                 如竹堂 Nyochiku-do
               </option>
     
               <option value='34.5971768,133.775792'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1534'
-                      data-placeid='ChIJbyt6sT5WUTURc95Sm18NwC8'>
+                      data-placeid='ChIJbyt6sT5WUTURc95Sm18NwC8'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1534","color":"#097138"}'>
                 atelier & salon HASHIMAYA
               </option>
     
               <option value='34.5963514,133.7722689'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1534'
-                      data-placeid='ChIJu-JwiDhWUTUR0CN10iDzi3o'>
+                      data-placeid='ChIJu-JwiDhWUTUR0CN10iDzi3o'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1534","color":"#097138"}'>
                 町家喫茶 三宅商店 Cafe Miyake Shouten
               </option>
     
               <option value='34.596023,133.7728342'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1534'
-                      data-placeid='ChIJmYNMF1NXUTURrMbWmPKY0-c'>
+                      data-placeid='ChIJmYNMF1NXUTURrMbWmPKY0-c'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1534","color":"#097138"}'>
                 炭珈琲 三村 Mimura Coffee
               </option>
     
               <option value='34.5966916,133.771991'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1534'
-                      data-placeid='ChIJ8bFdhDhWUTURw7Y0RxB4ieQ'>
+                      data-placeid='ChIJ8bFdhDhWUTURw7Y0RxB4ieQ'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1534","color":"#097138"}'>
                 有鄰庵 Yuurin-an Guesthouse & Cafe
               </option>
     
               <option value='34.5958443,133.771958'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1899'
-                      data-placeid='ChIJ1do4lkdWUTURvg3rFkFpzhE'>
+                      data-placeid='ChIJ1do4lkdWUTURvg3rFkFpzhE'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1899","color":"#097138"}'>
                 倉敷市倉敷川畔
               </option>
     
               <option value='34.5955572,133.7718805'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1899'
-                      data-placeid='ChIJrxy5kkNWUTURQyRg1NEHao8'>
+                      data-placeid='ChIJrxy5kkNWUTURQyRg1NEHao8'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1899","color":"#097138"}'>
                 Boat Ride Boarding
               </option>
     
               <option value='34.5952643,133.7722201'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1899'
-                      data-placeid='ChIJCWGuZ7tXUTURKkiLK6Jb9ws'>
+                      data-placeid='ChIJCWGuZ7tXUTURKkiLK6Jb9ws'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1899","color":"#097138"}'>
                 SNOOPY Chocolat
               </option>
     
               <option value='34.5947337,133.7722879'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJe0fBDzhWUTURNj7R89whHTY'>
+                      data-placeid='ChIJe0fBDzhWUTURNj7R89whHTY'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1684","color":"#097138"}'>
                 TANE×612 FACTORY
               </option>
     
               <option value='34.5944199,133.7718111'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1534'
-                      data-placeid='ChIJMQMeBzhWUTURGJEUhcfO7cg'>
+                      data-placeid='ChIJMQMeBzhWUTURGJEUhcfO7cg'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1534","color":"#097138"}'>
                 廣榮堂 Koeido Kurashikiyukeiten
               </option>
     
               <option value='34.5947279,133.7745473'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJC7yOQThWUTUR_AwPS8x09CU'>
+                      data-placeid='ChIJC7yOQThWUTUR_AwPS8x09CU'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1684","color":"#097138"}'>
                 倉敷常春藤廣場 Kurashiki Ivy Square
               </option>
     
               <option value='34.5945272,133.7713989'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJxUU84EdWUTURu8SxrMZXcE8'>
+                      data-placeid='ChIJxUU84EdWUTURu8SxrMZXcE8'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1684","color":"#097138"}'>
                 倉敷丹寧街 Kurashiki Denim Street
               </option>
     
               <option value='34.5952824,133.7714627'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJtY4Y9r5XUTURMvvL13genXA'>
+                      data-placeid='ChIJtY4Y9r5XUTURMvvL13genXA'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1684","color":"#097138"}'>
                 倉敷SOLA Kurashiki SOLA
               </option>
     
               <option value='34.6018457,133.7669369'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJy3i0X0FWUTUR25_Lm15CC8E'>
+                      data-placeid='ChIJy3i0X0FWUTUR25_Lm15CC8E'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1684","color":"#097138"}'>
                 倉敷天満屋 Tenmaya Kurashiki Store
               </option>
     
               <option value='34.6036374,133.7645434'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJ97OuT0NWUTURqjHNhfKaJZw'>
+                      data-placeid='ChIJ97OuT0NWUTURqjHNhfKaJZw'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1684","color":"#097138"}'>
                 Ario Kurashiki
               </option>
     
               <option value='34.6035866,133.7614948'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJc7EQr1xWUTURZ0IX8YyTBjQ'>
+                      data-placeid='ChIJc7EQr1xWUTURZ0IX8YyTBjQ'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1684","color":"#097138"}'>
                 Mitsui Outlet Park Kurashiki
               </option>
     
               <option value='34.8267967,134.6905326'
                       data-group='3'
                       data-color='#C2185B'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=C2185B,ff000000&scale=1.0'
                       data-icon-number='1716'
-                      data-placeid='ChIJHT_ushLgVDURVTdlA9jzxzc'>
+                      data-placeid='ChIJHT_ushLgVDURVTdlA9jzxzc'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=C2185B,ff000000&scale=1.0","iconNumber":"1716","color":"#C2185B"}'>
                 姫路駅 HIMEJI STATION
               </option>
     
               <option value='34.8281163,134.6910363'
                       data-group='3'
                       data-color='#C2185B'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=C2185B,ff000000&scale=1.0'
                       data-icon-number='1899'
-                      data-placeid='ChIJQ8vsdw3gVDURoatPa2r54Ys'>
+                      data-placeid='ChIJQ8vsdw3gVDURoatPa2r54Ys'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=C2185B,ff000000&scale=1.0","iconNumber":"1899","color":"#C2185B"}'>
                 Festa Building
               </option>
     
               <option value='34.839449,134.6939047'
                       data-group='3'
                       data-color='#C2185B'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1598-historic-building_4x.png&highlight=C2185B,ff000000&scale=1.0'
                       data-icon-number='1598'
-                      data-placeid='ChIJsyQzogPgVDURsYG6bi-MT3o'>
+                      data-placeid='ChIJsyQzogPgVDURsYG6bi-MT3o'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1598-historic-building_4x.png&highlight=C2185B,ff000000&scale=1.0","iconNumber":"1598","color":"#C2185B"}'>
                 姫路城 Himeji Castle
               </option>
     
               <option value='34.8370858,134.6904017'
                       data-group='3'
                       data-color='#C2185B'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=C2185B,ff000000&scale=1.0'
                       data-icon-number='1899'
-                      data-placeid='ChIJDxT9HRvgVDURt_SPzwe2f_E'>
+                      data-placeid='ChIJDxT9HRvgVDURt_SPzwe2f_E'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=C2185B,ff000000&scale=1.0","iconNumber":"1899","color":"#C2185B"}'>
                 好古園 Koko-en
               </option>
     
               <option value='34.8889826,134.6605038'
                       data-group='3'
                       data-color='#C2185B'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1598-historic-building_4x.png&highlight=C2185B,ff000000&scale=1.0'
                       data-icon-number='1598'
-                      data-placeid='ChIJ8XekUFEeVTUReE7cQvDevKU'>
+                      data-placeid='ChIJ8XekUFEeVTUReE7cQvDevKU'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1598-historic-building_4x.png&highlight=C2185B,ff000000&scale=1.0","iconNumber":"1598","color":"#C2185B"}'>
                 書寫山 圓教寺 Engyōji
               </option>
     
               <option value='34.831427,134.6924968'
                       data-group='3'
                       data-color='#C2185B'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=C2185B,ff000000&scale=1.0'
                       data-icon-number='1534'
-                      data-placeid='ChIJT0LpRg7gVDURsc67nH_nVXU'>
+                      data-placeid='ChIJT0LpRg7gVDURsc67nH_nVXU'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=C2185B,ff000000&scale=1.0","iconNumber":"1534","color":"#C2185B"}'>
                 Hamamoto Coffee
               </option>
     
               <option value='34.82767,134.6913551'
                       data-group='3'
                       data-color='#C2185B'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=C2185B,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJexplgxLgVDURqMzZjNRee_g'>
+                      data-placeid='ChIJexplgxLgVDURqMzZjNRee_g'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=C2185B,ff000000&scale=1.0","iconNumber":"1577","color":"#C2185B"}'>
                 姫路タコピィ Akashiyaki Restaurant himeji Tacopy
               </option>
     
               <option value='34.8289341,134.6924607'
                       data-group='3'
                       data-color='#C2185B'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=C2185B,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJ6bJAlQ3gVDURW24gh4sR2ks'>
+                      data-placeid='ChIJ6bJAlQ3gVDURW24gh4sR2ks'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=C2185B,ff000000&scale=1.0","iconNumber":"1577","color":"#C2185B"}'>
                 炭焼あなご やま義 Yamayoshi
               </option>
     
               <option value='34.8353147,134.6923496'
                       data-group='3'
                       data-color='#C2185B'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=C2185B,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJ5fkA6wTgVDURtLUxoKCc0po'>
+                      data-placeid='ChIJ5fkA6wTgVDURtLUxoKCc0po'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=C2185B,ff000000&scale=1.0","iconNumber":"1577","color":"#C2185B"}'>
                 たまごや Tamagoya
               </option>
     
               <option value='34.8343222,134.6848652'
                       data-group='3'
                       data-color='#C2185B'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=C2185B,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJBwzU8hbgVDUR1M-DSpV7_D4'>
+                      data-placeid='ChIJBwzU8hbgVDUR1M-DSpV7_D4'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=C2185B,ff000000&scale=1.0","iconNumber":"1577","color":"#C2185B"}'>
                 せんば 安積精肉店 Azumi Meat Shop
               </option>
     
               <option value='34.6928673,135.1899272'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1602-hotel-bed_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1602'
-                      data-placeid='ChIJJ2Jf0VmPAGARH1mPezEnyAM'>
+                      data-placeid='ChIJJ2Jf0VmPAGARH1mPezEnyAM'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1602-hotel-bed_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1602","color":"#000000"}'>
                 The Royal Park Canvas Kobe Sannomiya
+              </option>
+    
+              <option value='34.6980326,135.1916258'
+                      data-group='4'
+                      data-color='#000000'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0'
+                      data-icon-number='1577'
+                      data-placeid='ChIJIbt1zeaOAGARBhMtXe5U5HI'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1577","color":"#000000"}'>
+                [10/25] 和黒 北野坂本店 Wakkoqu
+              </option>
+    
+              <option value='34.6932052,135.1900641'
+                      data-group='4'
+                      data-color='#000000'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0'
+                      data-icon-number='1577'
+                      data-placeid='ChIJ4chXCeOOAGARijPfq6oSJFQ'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1577","color":"#000000"}'>
+                [10/26] 神戸プレジール Kobe Plaisir
+              </option>
+    
+              <option value='34.6954974,135.1912754'
+                      data-group='4'
+                      data-color='#000000'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0'
+                      data-icon-number='1577'
+                      data-placeid='ChIJEfCH9uOOAGARQpqnmKP9IzE'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1577","color":"#000000"}'>
+                [10/27] 丹波京黒鶏 かね辰 Kanetatsu
               </option>
     
               <option value='34.7062884,135.1954675'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1716'
-                      data-placeid='ChIJi_tJT8OOAGAR-zhJ9dkQC3k'>
+                      data-placeid='ChIJi_tJT8OOAGAR-zhJ9dkQC3k'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1716","color":"#000000"}'>
                 新神戸駅 Shin-Kobe Station
               </option>
     
               <option value='34.6938491,135.1960454'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1716'
-                      data-placeid='ChIJLaExxuSOAGARgg3ZryclKP4'>
+                      data-placeid='ChIJLaExxuSOAGARgg3ZryclKP4'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1716","color":"#000000"}'>
                 神戸三宮駅 Kobe-Sannomiya Station
               </option>
     
               <option value='34.694659,135.1949544'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1716'
-                      data-placeid='ChIJMyrOC-OOAGARaYTs9vv5t4w'>
+                      data-placeid='ChIJMyrOC-OOAGARaYTs9vv5t4w'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1716","color":"#000000"}'>
                 三ノ宮駅 Sannomiya Station
               </option>
     
               <option value='34.6895662,135.1873482'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1716'
-                      data-placeid='ChIJFyYemvKFAGARXfpsr2THmv8'>
+                      data-placeid='ChIJFyYemvKFAGARXfpsr2THmv8'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1716","color":"#000000"}'>
                 元町駅 Motomachi Station
               </option>
     
               <option value='34.6895055,135.1904406'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1716'
-                      data-placeid='ChIJjVPji_yOAGARcEoWc724nHE'>
+                      data-placeid='ChIJjVPji_yOAGARcEoWc724nHE'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1716","color":"#000000"}'>
                 旧居留地・大丸前駅 Kyūkyoryūchi-Daimarumae Station
               </option>
     
               <option value='34.6795151,135.1782533'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1716'
-                      data-placeid='ChIJndrfMAaPAGAR7_THBJSK10M'>
+                      data-placeid='ChIJndrfMAaPAGAR7_THBJSK10M'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1716","color":"#000000"}'>
                 神戸駅 Kobe Station
               </option>
     
               <option value='34.6882142,135.1881104'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1899'
-                      data-placeid='ChIJkaqwvf2OAGARARl_1gEYbx0'>
+                      data-placeid='ChIJkaqwvf2OAGARARl_1gEYbx0'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1899","color":"#000000"}'>
                 南京町 Kobe Chinatown Nankin-machi
               </option>
     
               <option value='34.6947159,135.1907243'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1598-historic-building_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1598'
-                      data-placeid='ChIJweCflOOOAGARSAhXB35rPCY'>
+                      data-placeid='ChIJweCflOOOAGARSAhXB35rPCY'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1598-historic-building_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1598","color":"#000000"}'>
                 生田神社 Ikuta-jinja Shrine
-              </option>
-    
-              <option value='34.6980326,135.1916258'
-                      data-group='4'
-                      data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
-                      data-icon-number='1577'
-                      data-placeid='ChIJIbt1zeaOAGARBhMtXe5U5HI'>
-                和黒 北野坂本店 Wakkoqu
-              </option>
-    
-              <option value='34.7045734,135.1952335'
-                      data-group='4'
-                      data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
-                      data-icon-number='1577'
-                      data-placeid='ChIJ7UX22ul_AGAROXiLIJYxXFI'>
-                和黒 新神戸店 Wakkoqu
-              </option>
-    
-              <option value='34.6926884,135.1918262'
-                      data-group='4'
-                      data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
-                      data-icon-number='1577'
-                      data-placeid='ChIJUXevGeSOAGARSmf_bLLZ_-8'>
-                鉄板焼 雪月花 本店 kobebeef steak house teppanyaki setsugetsuka honten
-              </option>
-    
-              <option value='34.6929964,135.1921423'
-                      data-group='4'
-                      data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
-                      data-icon-number='1577'
-                      data-placeid='ChIJVVUFoeSOAGAR4_Sbxs2rOzs'>
-                Steakland Kobe
-              </option>
-    
-              <option value='34.6884735,135.1859196'
-                      data-group='4'
-                      data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
-                      data-icon-number='1577'
-                      data-placeid='ChIJ6UzSuAKPAGARm1dRiqKQsUM'>
-                洋食 Quattro Yoshoku Quattro
-              </option>
-    
-              <option value='34.6861976,135.1868326'
-                      data-group='4'
-                      data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
-                      data-icon-number='1577'
-                      data-placeid='ChIJS9AVCgKPAGARUMcF-5P3mrk'>
-                Patisserie Mont Plus
-              </option>
-    
-              <option value='34.6998321,135.1902342'
-                      data-group='4'
-                      data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
-                      data-icon-number='1534'
-                      data-placeid='ChIJrVIbmeCOAGARQAS2XOtwiLs'>
-                Starbucks Coffee - Kobe Kitano Ijinkan
               </option>
     
               <option value='34.688862,135.1894819'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJ-8xjmQKPAGARLnD-uksTTOo'>
+                      data-placeid='ChIJ-8xjmQKPAGARLnD-uksTTOo'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1684","color":"#000000"}'>
                 神戶元町商店街 Kobe Motomachi Shopping Street
               </option>
     
               <option value='34.688689,135.1900346'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJz2ziZ_yOAGARzxS9kGFnezs'>
+                      data-placeid='ChIJz2ziZ_yOAGARzxS9kGFnezs'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1684","color":"#000000"}'>
                 大丸神戸店 Daimaru Kobe
+              </option>
+    
+              <option value='34.6861976,135.1868326'
+                      data-group='4'
+                      data-color='#000000'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=000000,ff000000&scale=1.0'
+                      data-icon-number='1534'
+                      data-placeid='ChIJS9AVCgKPAGARUMcF-5P3mrk'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1534","color":"#000000"}'>
+                Patisserie Mont Plus
               </option>
     
               <option value='34.6911739,135.1918152'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJzTIY6PqOAGARCO1VPdaTst4'>
+                      data-placeid='ChIJzTIY6PqOAGARCO1VPdaTst4'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1684","color":"#000000"}'>
                 神戸三宮センター街 Sannomiya Center Gai Shopping Street
+              </option>
+    
+              <option value='34.6998321,135.1902342'
+                      data-group='4'
+                      data-color='#000000'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=000000,ff000000&scale=1.0'
+                      data-icon-number='1534'
+                      data-placeid='ChIJrVIbmeCOAGARQAS2XOtwiLs'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1534","color":"#000000"}'>
+                Starbucks Coffee - Kobe Kitano Ijinkan
               </option>
     
               <option value='34.7007283,135.1907906'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1899'
-                      data-placeid='ChIJT6cViuCOAGARegX_ORkvbs0'>
+                      data-placeid='ChIJT6cViuCOAGARegX_ORkvbs0'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1899","color":"#000000"}'>
                 神戸北野異人館街 Kobe Kitano Ijinkan-Gai
-              </option>
-    
-              <option value='34.6907177,135.1886264'
-                      data-group='4'
-                      data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
-                      data-icon-number='1577'
-                      data-placeid='ChIJiWGfzeKOAGARl-vFFK6bpP4'>
-                Red Rock Motomachi
-              </option>
-    
-              <option value='34.6924221,135.19206'
-                      data-group='4'
-                      data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
-                      data-icon-number='1577'
-                      data-placeid='ChIJz6idq-SOAGARSQSToTxtnRY'>
-                Red Rock
               </option>
     
               <option value='34.7006601,135.1900265'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1899'
-                      data-placeid='ChIJtyH0Ot6OAGARdG9wODCpcT0'>
+                      data-placeid='ChIJtyH0Ot6OAGARdG9wODCpcT0'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1899","color":"#000000"}'>
                 風見鶏本舗
               </option>
     
               <option value='34.7342415,135.2063283'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1899'
-                      data-placeid='ChIJK9Er5z6JAGAR6-_inZvie2o'>
+                      data-placeid='ChIJK9Er5z6JAGAR6-_inZvie2o'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1899","color":"#000000"}'>
                 掬星台 Kikuseidai (Observation Platform)
+              </option>
+    
+              <option value='34.7045734,135.1952335'
+                      data-group='4'
+                      data-color='#000000'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0'
+                      data-icon-number='1577'
+                      data-placeid='ChIJ7UX22ul_AGAROXiLIJYxXFI'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1577","color":"#000000"}'>
+                和黒 新神戸店 Wakkoqu
+              </option>
+    
+              <option value='34.6926884,135.1918262'
+                      data-group='4'
+                      data-color='#000000'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0'
+                      data-icon-number='1577'
+                      data-placeid='ChIJUXevGeSOAGARSmf_bLLZ_-8'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1577","color":"#000000"}'>
+                鉄板焼 雪月花 本店 kobebeef steak house teppanyaki setsugetsuka honten
+              </option>
+    
+              <option value='34.6929964,135.1921423'
+                      data-group='4'
+                      data-color='#000000'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0'
+                      data-icon-number='1577'
+                      data-placeid='ChIJVVUFoeSOAGAR4_Sbxs2rOzs'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1577","color":"#000000"}'>
+                Steakland Kobe
+              </option>
+    
+              <option value='34.6884735,135.1859196'
+                      data-group='4'
+                      data-color='#000000'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0'
+                      data-icon-number='1577'
+                      data-placeid='ChIJ6UzSuAKPAGARm1dRiqKQsUM'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1577","color":"#000000"}'>
+                洋食 Quattro Yoshoku Quattro
+              </option>
+    
+              <option value='34.6924221,135.19206'
+                      data-group='4'
+                      data-color='#000000'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0'
+                      data-icon-number='1577'
+                      data-placeid='ChIJz6idq-SOAGARSQSToTxtnRY'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1577","color":"#000000"}'>
+                [Donburi] Red Rock
+              </option>
+    
+              <option value='34.6907177,135.1886264'
+                      data-group='4'
+                      data-color='#000000'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0'
+                      data-icon-number='1577'
+                      data-placeid='ChIJiWGfzeKOAGARl-vFFK6bpP4'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1577","color":"#000000"}'>
+                [Donburi] Red Rock Motomachi
+              </option>
+    
+              <option value='34.6920479,135.1910015'
+                      data-group='4'
+                      data-color='#000000'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0'
+                      data-icon-number='1577'
+                      data-placeid='ChIJ7dlzvqyPAGARg6PjVeQmJ9o'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1577","color":"#000000"}'>
+                [Sushi] 大衆寿司酒場 すさび湯 三宮店Susabiyu Sannomiya
+              </option>
+    
+              <option value='34.6925643,135.191693'
+                      data-group='4'
+                      data-color='#000000'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0'
+                      data-icon-number='1577'
+                      data-placeid='ChIJkQmOpMWPAGARh0X9ToavLs4'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1577","color":"#000000"}'>
+                [Sushi] 三宮スシエビス
+              </option>
+    
+              <option value='34.6952998,135.1966451'
+                      data-group='4'
+                      data-color='#000000'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0'
+                      data-icon-number='1577'
+                      data-placeid='ChIJYzEI8--OAGAROTN5OfzWiw0'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1577","color":"#000000"}'>
+                [Sushi] もりもり寿し 三宮OPA2店 Morimori-Sushi Sannomiya OPA2
               </option>
     
             </select>
@@ -838,744 +1031,876 @@
           <div class="col-sm-11">
             <select id="to" class="form-select">
               
-              <option value="" data-color="#d3a">Current Location</option>
+              <option value="" data-color="#d3a" data-custom-properties='{"iconUrl":"bootstrap-icon"}'>Current Location</option>
 
               <option value='34.4319994,135.2366019'
                       data-group='0'
                       data-color='#0288D1'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1504-airport-plane_4x.png&highlight=0288D1,ff000000&scale=1.0'
                       data-icon-number='1504'
-                      data-placeid='ChIJ9_rNIxO5AGARiI-QjZ-ncfE'>
+                      data-placeid='ChIJ9_rNIxO5AGARiI-QjZ-ncfE'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1504-airport-plane_4x.png&highlight=0288D1,ff000000&scale=1.0","iconNumber":"1504","color":"#0288D1"}'>
                 関西国際空港 Kansai International Airport
               </option>
     
               <option value='34.7335716,135.4985691'
                       data-group='0'
                       data-color='#0288D1'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=0288D1,ff000000&scale=1.0'
                       data-icon-number='1716'
-                      data-placeid='ChIJSc4SbDnkAGARz3YQv-DE1zs'>
+                      data-placeid='ChIJSc4SbDnkAGARz3YQv-DE1zs'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=0288D1,ff000000&scale=1.0","iconNumber":"1716","color":"#0288D1"}'>
                 新大阪駅 Shin-Osaka Station
               </option>
     
               <option value='34.6634525,133.9173328'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1602-hotel-bed_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1602'
-                      data-placeid='ChIJnxFPKk0GVDURmuifpSR-5mk'>
+                      data-placeid='ChIJnxFPKk0GVDURmuifpSR-5mk'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1602-hotel-bed_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1602","color":"#9C27B0"}'>
                 Mitsui Garden Hotel Okayama
               </option>
     
               <option value='34.6602202,133.9233973'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJ4XlrVvMHVDURpN9tlQ6fjnY'>
-                Osteria la Ricetta 10/21
+                      data-placeid=''
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1577","color":"#9C27B0"}'>
+                [10/21] Osteria la Ricetta
               </option>
     
               <option value='34.6637518,133.9218645'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJ3a3Gd0sGVDURV96beKdN2Kk'>
-                Duomo 10/22
+                      data-placeid=''
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1577","color":"#9C27B0"}'>
+                [10/22] Duomo
               </option>
     
               <option value='34.6639837,133.921914'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJ_3z7ZLsHVDURA9iZlgb5oaE'>
-                TRONC トロン 10/23
+                      data-placeid=''
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1577","color":"#9C27B0"}'>
+                [10/23] TRONC トロン
               </option>
     
               <option value='34.6661212,133.9177335'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1716'
-                      data-placeid='ChIJ04njPUwGVDURV885IqoD16I'>
+                      data-placeid='ChIJ04njPUwGVDURV885IqoD16I'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1716","color":"#9C27B0"}'>
                 岡山駅 Okayama Station
               </option>
     
               <option value='34.6651878,133.9360657'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1598-historic-building_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1598'
-                      data-placeid='ChIJER_WDSUGVDURujV4pMtef44'>
+                      data-placeid='ChIJER_WDSUGVDURujV4pMtef44'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1598-historic-building_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1598","color":"#9C27B0"}'>
                 岡山城 Okayama Castle
               </option>
     
               <option value='34.6673339,133.93617'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1598-historic-building_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1598'
-                      data-placeid='ChIJhwt8jCQGVDURabQ6FPH0nXQ'>
+                      data-placeid='ChIJhwt8jCQGVDURabQ6FPH0nXQ'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1598-historic-building_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1598","color":"#9C27B0"}'>
                 岡山後楽園 Okayama Korakuen
               </option>
     
               <option value='34.6672375,133.9372488'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1899'
-                      data-placeid='ChIJdbc4IpoHVDURd6_GH_1KRnA'>
+                      data-placeid='ChIJdbc4IpoHVDURd6_GH_1KRnA'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1899","color":"#9C27B0"}'>
                 千入の森 Chishio-no-Mori Grove
               </option>
     
               <option value='34.6768634,133.8640841'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1598-historic-building_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1598'
-                      data-placeid='ChIJSeyCvM0AVDURl4DW7BR-cBw'>
+                      data-placeid='ChIJSeyCvM0AVDURl4DW7BR-cBw'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1598-historic-building_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1598","color":"#9C27B0"}'>
                 吉備津彦神社 Kibitsuhiko Shrine
               </option>
     
               <option value='34.659175,133.9728028'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1899'
-                      data-placeid='ChIJ5RP8ztwIVDUR12H7AhuNEqU'>
+                      data-placeid='ChIJ5RP8ztwIVDUR12H7AhuNEqU'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1899","color":"#9C27B0"}'>
                 曹源寺 Sogen Temple
               </option>
     
               <option value='34.6661733,133.9194993'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJvZ9MD0wGVDURRO5K45ehtoE'>
+                      data-placeid='ChIJvZ9MD0wGVDURRO5K45ehtoE'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1684","color":"#9C27B0"}'>
                 岡山駅前商店街 Okayama Ekimae Shopping Street
               </option>
     
               <option value='34.6652401,133.9185859'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJqQpMMU0GVDURqYP83ojGKIE'>
+                      data-placeid='ChIJqQpMMU0GVDURqYP83ojGKIE'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1684","color":"#9C27B0"}'>
                 岡山一番街 Okayama Ichibangai
               </option>
     
               <option value='34.6620824,133.9177261'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJkyqZELMHVDUREhwbsCvO-I0'>
+                      data-placeid='ChIJkyqZELMHVDUREhwbsCvO-I0'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1684","color":"#9C27B0"}'>
                 AEON Mall Okayama
               </option>
     
               <option value='34.6691294,133.9245496'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJ3ZQcRhEHVDURGeLxHgKk8x4'>
+                      data-placeid='ChIJ3ZQcRhEHVDURGeLxHgKk8x4'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1577","color":"#9C27B0"}'>
                 400℃ Pizza
               </option>
     
               <option value='34.665429,133.9179997'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJbY-XI00GVDURSBrGhbRSxWc'>
+                      data-placeid='ChIJbY-XI00GVDURSBrGhbRSxWc'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1577","color":"#9C27B0"}'>
                 吾妻寿司 Azuma Sushi Sun Station Terrace Okayama shop
               </option>
     
               <option value='34.6695904,133.9142703'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJfVGm8VEGVDURIyukP3CtWto'>
+                      data-placeid='ChIJfVGm8VEGVDURIyukP3CtWto'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1577","color":"#9C27B0"}'>
                 焼肉割烹J's苑 Yakiniku J's En
               </option>
     
               <option value='34.6690934,133.9209575'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJYaU-3UgGVDURQsvNzGYTlhQ'>
+                      data-placeid='ChIJYaU-3UgGVDURQsvNzGYTlhQ'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1577","color":"#9C27B0"}'>
                 肉のほそだ Sukiyaki Shabu Shabu House of Hosoda
               </option>
     
               <option value='34.6623661,133.9214402'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJUS_VPUsGVDURBEV5JpWzMeM'>
+                      data-placeid='ChIJUS_VPUsGVDURBEV5JpWzMeM'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1577","color":"#9C27B0"}'>
                 お好み焼 幸 Sachi Okonomiyaki Restaurant
               </option>
     
               <option value='34.6696567,133.9178779'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJxySz_U4GVDUR3ExlIO57eEs'>
+                      data-placeid='ChIJxySz_U4GVDUR3ExlIO57eEs'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1577","color":"#9C27B0"}'>
                 お好み焼きもり Mori
               </option>
     
               <option value='34.6594578,133.9203096'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJczDjRUYHVDURtEc6YY-v_NY'>
+                      data-placeid='ChIJczDjRUYHVDURtEc6YY-v_NY'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1577","color":"#9C27B0"}'>
                 焼肉 千祥 Kanzenkoshitsu Yakiniku Senshoh Yanagimachiten
               </option>
     
               <option value='34.6645627,133.9299301'
                       data-group='1'
                       data-color='#9C27B0'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
-                      data-icon-number='1577'
-                      data-placeid='ChIJN8U-jqgHVDURRKTIKNK3D7w'>
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=9C27B0,ff000000&scale=1.0'
+                      data-icon-number='1534'
+                      data-placeid='ChIJN8U-jqgHVDURRKTIKNK3D7w'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=9C27B0,ff000000&scale=1.0","iconNumber":"1534","color":"#9C27B0"}'>
                 一鳥目 Itchōme
               </option>
     
               <option value='34.6019289,133.7657774'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1716'
-                      data-placeid='ChIJrxy5kkNWUTURZTQqL8CoiTA'>
+                      data-placeid='ChIJrxy5kkNWUTURZTQqL8CoiTA'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1716","color":"#097138"}'>
                 倉敷駅 Kurashiki Station
               </option>
     
               <option value='34.5988063,133.7698235'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJk2luPkdWUTURqnO2E5CuwDY'>
+                      data-placeid='ChIJk2luPkdWUTURqnO2E5CuwDY'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1684","color":"#097138"}'>
                 倉敷えびす通商店街 Yebisu Shopping Mall
               </option>
     
               <option value='34.5990711,133.7704081'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJH-mOMJRXUTUR5Kc3AMFMOVc'>
+                      data-placeid='ChIJH-mOMJRXUTUR5Kc3AMFMOVc'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1577","color":"#097138"}'>
                 ことりふらっと
               </option>
     
               <option value='34.5992707,133.7704114'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJ7fkq7WlWUTUR_xEF7XEf89s'>
+                      data-placeid='ChIJ7fkq7WlWUTUR_xEF7XEf89s'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1577","color":"#097138"}'>
                 月のうつわ Tsuki-no Utsuwa
               </option>
     
               <option value='34.598745,133.7699451'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJXZMeO0dWUTURBt0BopNwrZc'>
+                      data-placeid='ChIJXZMeO0dWUTURBt0BopNwrZc'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1577","color":"#097138"}'>
                 肉のいろは 阿知店 Iroha
               </option>
     
               <option value='34.59844,133.770267'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJY4mOPkdWUTUR3_50UjuhmPw'>
+                      data-placeid='ChIJY4mOPkdWUTUR3_50UjuhmPw'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1577","color":"#097138"}'>
                 えびす饅頭 Ebisu Manju
               </option>
     
               <option value='34.5974443,133.7704574'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1534'
-                      data-placeid='ChIJuzTaDEdWUTURFZR0lu8yUd4'>
+                      data-placeid='ChIJuzTaDEdWUTURFZR0lu8yUd4'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1534","color":"#097138"}'>
                 Cafe Gewa
               </option>
     
               <option value='34.5973317,133.7704033'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJN0tWC0dWUTUR84Fbiwb3rBo'>
+                      data-placeid='ChIJN0tWC0dWUTUR84Fbiwb3rBo'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1684","color":"#097138"}'>
                 林源十郎商店 Hayashi Genjuro Shouten
               </option>
     
               <option value='34.5974817,133.7734765'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1899'
-                      data-placeid='ChIJm4wn0DhWUTURnE-3zlklpf8'>
+                      data-placeid='ChIJm4wn0DhWUTURnE-3zlklpf8'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1899","color":"#097138"}'>
                 阿智神社 Achi Shrine
               </option>
     
               <option value='34.5967521,133.7753184'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJa8XaSTlWUTURQ8uhd8ztGss'>
+                      data-placeid='ChIJa8XaSTlWUTURQ8uhd8ztGss'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1684","color":"#097138"}'>
                 如竹堂 Nyochiku-do
               </option>
     
               <option value='34.5971768,133.775792'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1534'
-                      data-placeid='ChIJbyt6sT5WUTURc95Sm18NwC8'>
+                      data-placeid='ChIJbyt6sT5WUTURc95Sm18NwC8'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1534","color":"#097138"}'>
                 atelier & salon HASHIMAYA
               </option>
     
               <option value='34.5963514,133.7722689'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1534'
-                      data-placeid='ChIJu-JwiDhWUTUR0CN10iDzi3o'>
+                      data-placeid='ChIJu-JwiDhWUTUR0CN10iDzi3o'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1534","color":"#097138"}'>
                 町家喫茶 三宅商店 Cafe Miyake Shouten
               </option>
     
               <option value='34.596023,133.7728342'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1534'
-                      data-placeid='ChIJmYNMF1NXUTURrMbWmPKY0-c'>
+                      data-placeid='ChIJmYNMF1NXUTURrMbWmPKY0-c'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1534","color":"#097138"}'>
                 炭珈琲 三村 Mimura Coffee
               </option>
     
               <option value='34.5966916,133.771991'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1534'
-                      data-placeid='ChIJ8bFdhDhWUTURw7Y0RxB4ieQ'>
+                      data-placeid='ChIJ8bFdhDhWUTURw7Y0RxB4ieQ'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1534","color":"#097138"}'>
                 有鄰庵 Yuurin-an Guesthouse & Cafe
               </option>
     
               <option value='34.5958443,133.771958'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1899'
-                      data-placeid='ChIJ1do4lkdWUTURvg3rFkFpzhE'>
+                      data-placeid='ChIJ1do4lkdWUTURvg3rFkFpzhE'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1899","color":"#097138"}'>
                 倉敷市倉敷川畔
               </option>
     
               <option value='34.5955572,133.7718805'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1899'
-                      data-placeid='ChIJrxy5kkNWUTURQyRg1NEHao8'>
+                      data-placeid='ChIJrxy5kkNWUTURQyRg1NEHao8'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1899","color":"#097138"}'>
                 Boat Ride Boarding
               </option>
     
               <option value='34.5952643,133.7722201'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1899'
-                      data-placeid='ChIJCWGuZ7tXUTURKkiLK6Jb9ws'>
+                      data-placeid='ChIJCWGuZ7tXUTURKkiLK6Jb9ws'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1899","color":"#097138"}'>
                 SNOOPY Chocolat
               </option>
     
               <option value='34.5947337,133.7722879'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJe0fBDzhWUTURNj7R89whHTY'>
+                      data-placeid='ChIJe0fBDzhWUTURNj7R89whHTY'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1684","color":"#097138"}'>
                 TANE×612 FACTORY
               </option>
     
               <option value='34.5944199,133.7718111'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1534'
-                      data-placeid='ChIJMQMeBzhWUTURGJEUhcfO7cg'>
+                      data-placeid='ChIJMQMeBzhWUTURGJEUhcfO7cg'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1534","color":"#097138"}'>
                 廣榮堂 Koeido Kurashikiyukeiten
               </option>
     
               <option value='34.5947279,133.7745473'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJC7yOQThWUTUR_AwPS8x09CU'>
+                      data-placeid='ChIJC7yOQThWUTUR_AwPS8x09CU'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1684","color":"#097138"}'>
                 倉敷常春藤廣場 Kurashiki Ivy Square
               </option>
     
               <option value='34.5945272,133.7713989'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJxUU84EdWUTURu8SxrMZXcE8'>
+                      data-placeid='ChIJxUU84EdWUTURu8SxrMZXcE8'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1684","color":"#097138"}'>
                 倉敷丹寧街 Kurashiki Denim Street
               </option>
     
               <option value='34.5952824,133.7714627'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJtY4Y9r5XUTURMvvL13genXA'>
+                      data-placeid='ChIJtY4Y9r5XUTURMvvL13genXA'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1684","color":"#097138"}'>
                 倉敷SOLA Kurashiki SOLA
               </option>
     
               <option value='34.6018457,133.7669369'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJy3i0X0FWUTUR25_Lm15CC8E'>
+                      data-placeid='ChIJy3i0X0FWUTUR25_Lm15CC8E'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1684","color":"#097138"}'>
                 倉敷天満屋 Tenmaya Kurashiki Store
               </option>
     
               <option value='34.6036374,133.7645434'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJ97OuT0NWUTURqjHNhfKaJZw'>
+                      data-placeid='ChIJ97OuT0NWUTURqjHNhfKaJZw'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1684","color":"#097138"}'>
                 Ario Kurashiki
               </option>
     
               <option value='34.6035866,133.7614948'
                       data-group='2'
                       data-color='#097138'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJc7EQr1xWUTURZ0IX8YyTBjQ'>
+                      data-placeid='ChIJc7EQr1xWUTURZ0IX8YyTBjQ'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=097138,ff000000&scale=1.0","iconNumber":"1684","color":"#097138"}'>
                 Mitsui Outlet Park Kurashiki
               </option>
     
               <option value='34.8267967,134.6905326'
                       data-group='3'
                       data-color='#C2185B'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=C2185B,ff000000&scale=1.0'
                       data-icon-number='1716'
-                      data-placeid='ChIJHT_ushLgVDURVTdlA9jzxzc'>
+                      data-placeid='ChIJHT_ushLgVDURVTdlA9jzxzc'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=C2185B,ff000000&scale=1.0","iconNumber":"1716","color":"#C2185B"}'>
                 姫路駅 HIMEJI STATION
               </option>
     
               <option value='34.8281163,134.6910363'
                       data-group='3'
                       data-color='#C2185B'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=C2185B,ff000000&scale=1.0'
                       data-icon-number='1899'
-                      data-placeid='ChIJQ8vsdw3gVDURoatPa2r54Ys'>
+                      data-placeid='ChIJQ8vsdw3gVDURoatPa2r54Ys'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=C2185B,ff000000&scale=1.0","iconNumber":"1899","color":"#C2185B"}'>
                 Festa Building
               </option>
     
               <option value='34.839449,134.6939047'
                       data-group='3'
                       data-color='#C2185B'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1598-historic-building_4x.png&highlight=C2185B,ff000000&scale=1.0'
                       data-icon-number='1598'
-                      data-placeid='ChIJsyQzogPgVDURsYG6bi-MT3o'>
+                      data-placeid='ChIJsyQzogPgVDURsYG6bi-MT3o'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1598-historic-building_4x.png&highlight=C2185B,ff000000&scale=1.0","iconNumber":"1598","color":"#C2185B"}'>
                 姫路城 Himeji Castle
               </option>
     
               <option value='34.8370858,134.6904017'
                       data-group='3'
                       data-color='#C2185B'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=C2185B,ff000000&scale=1.0'
                       data-icon-number='1899'
-                      data-placeid='ChIJDxT9HRvgVDURt_SPzwe2f_E'>
+                      data-placeid='ChIJDxT9HRvgVDURt_SPzwe2f_E'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=C2185B,ff000000&scale=1.0","iconNumber":"1899","color":"#C2185B"}'>
                 好古園 Koko-en
               </option>
     
               <option value='34.8889826,134.6605038'
                       data-group='3'
                       data-color='#C2185B'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1598-historic-building_4x.png&highlight=C2185B,ff000000&scale=1.0'
                       data-icon-number='1598'
-                      data-placeid='ChIJ8XekUFEeVTUReE7cQvDevKU'>
+                      data-placeid='ChIJ8XekUFEeVTUReE7cQvDevKU'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1598-historic-building_4x.png&highlight=C2185B,ff000000&scale=1.0","iconNumber":"1598","color":"#C2185B"}'>
                 書寫山 圓教寺 Engyōji
               </option>
     
               <option value='34.831427,134.6924968'
                       data-group='3'
                       data-color='#C2185B'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=C2185B,ff000000&scale=1.0'
                       data-icon-number='1534'
-                      data-placeid='ChIJT0LpRg7gVDURsc67nH_nVXU'>
+                      data-placeid='ChIJT0LpRg7gVDURsc67nH_nVXU'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=C2185B,ff000000&scale=1.0","iconNumber":"1534","color":"#C2185B"}'>
                 Hamamoto Coffee
               </option>
     
               <option value='34.82767,134.6913551'
                       data-group='3'
                       data-color='#C2185B'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=C2185B,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJexplgxLgVDURqMzZjNRee_g'>
+                      data-placeid='ChIJexplgxLgVDURqMzZjNRee_g'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=C2185B,ff000000&scale=1.0","iconNumber":"1577","color":"#C2185B"}'>
                 姫路タコピィ Akashiyaki Restaurant himeji Tacopy
               </option>
     
               <option value='34.8289341,134.6924607'
                       data-group='3'
                       data-color='#C2185B'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=C2185B,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJ6bJAlQ3gVDURW24gh4sR2ks'>
+                      data-placeid='ChIJ6bJAlQ3gVDURW24gh4sR2ks'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=C2185B,ff000000&scale=1.0","iconNumber":"1577","color":"#C2185B"}'>
                 炭焼あなご やま義 Yamayoshi
               </option>
     
               <option value='34.8353147,134.6923496'
                       data-group='3'
                       data-color='#C2185B'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=C2185B,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJ5fkA6wTgVDURtLUxoKCc0po'>
+                      data-placeid='ChIJ5fkA6wTgVDURtLUxoKCc0po'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=C2185B,ff000000&scale=1.0","iconNumber":"1577","color":"#C2185B"}'>
                 たまごや Tamagoya
               </option>
     
               <option value='34.8343222,134.6848652'
                       data-group='3'
                       data-color='#C2185B'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=C2185B,ff000000&scale=1.0'
                       data-icon-number='1577'
-                      data-placeid='ChIJBwzU8hbgVDUR1M-DSpV7_D4'>
+                      data-placeid='ChIJBwzU8hbgVDUR1M-DSpV7_D4'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=C2185B,ff000000&scale=1.0","iconNumber":"1577","color":"#C2185B"}'>
                 せんば 安積精肉店 Azumi Meat Shop
               </option>
     
               <option value='34.6928673,135.1899272'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1602-hotel-bed_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1602'
-                      data-placeid='ChIJJ2Jf0VmPAGARH1mPezEnyAM'>
+                      data-placeid='ChIJJ2Jf0VmPAGARH1mPezEnyAM'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1602-hotel-bed_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1602","color":"#000000"}'>
                 The Royal Park Canvas Kobe Sannomiya
+              </option>
+    
+              <option value='34.6980326,135.1916258'
+                      data-group='4'
+                      data-color='#000000'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0'
+                      data-icon-number='1577'
+                      data-placeid='ChIJIbt1zeaOAGARBhMtXe5U5HI'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1577","color":"#000000"}'>
+                [10/25] 和黒 北野坂本店 Wakkoqu
+              </option>
+    
+              <option value='34.6932052,135.1900641'
+                      data-group='4'
+                      data-color='#000000'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0'
+                      data-icon-number='1577'
+                      data-placeid='ChIJ4chXCeOOAGARijPfq6oSJFQ'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1577","color":"#000000"}'>
+                [10/26] 神戸プレジール Kobe Plaisir
+              </option>
+    
+              <option value='34.6954974,135.1912754'
+                      data-group='4'
+                      data-color='#000000'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0'
+                      data-icon-number='1577'
+                      data-placeid='ChIJEfCH9uOOAGARQpqnmKP9IzE'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1577","color":"#000000"}'>
+                [10/27] 丹波京黒鶏 かね辰 Kanetatsu
               </option>
     
               <option value='34.7062884,135.1954675'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1716'
-                      data-placeid='ChIJi_tJT8OOAGAR-zhJ9dkQC3k'>
+                      data-placeid='ChIJi_tJT8OOAGAR-zhJ9dkQC3k'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1716","color":"#000000"}'>
                 新神戸駅 Shin-Kobe Station
               </option>
     
               <option value='34.6938491,135.1960454'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1716'
-                      data-placeid='ChIJLaExxuSOAGARgg3ZryclKP4'>
+                      data-placeid='ChIJLaExxuSOAGARgg3ZryclKP4'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1716","color":"#000000"}'>
                 神戸三宮駅 Kobe-Sannomiya Station
               </option>
     
               <option value='34.694659,135.1949544'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1716'
-                      data-placeid='ChIJMyrOC-OOAGARaYTs9vv5t4w'>
+                      data-placeid='ChIJMyrOC-OOAGARaYTs9vv5t4w'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1716","color":"#000000"}'>
                 三ノ宮駅 Sannomiya Station
               </option>
     
               <option value='34.6895662,135.1873482'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1716'
-                      data-placeid='ChIJFyYemvKFAGARXfpsr2THmv8'>
+                      data-placeid='ChIJFyYemvKFAGARXfpsr2THmv8'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1716","color":"#000000"}'>
                 元町駅 Motomachi Station
               </option>
     
               <option value='34.6895055,135.1904406'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1716'
-                      data-placeid='ChIJjVPji_yOAGARcEoWc724nHE'>
+                      data-placeid='ChIJjVPji_yOAGARcEoWc724nHE'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1716","color":"#000000"}'>
                 旧居留地・大丸前駅 Kyūkyoryūchi-Daimarumae Station
               </option>
     
               <option value='34.6795151,135.1782533'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1716'
-                      data-placeid='ChIJndrfMAaPAGAR7_THBJSK10M'>
+                      data-placeid='ChIJndrfMAaPAGAR7_THBJSK10M'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1716-train_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1716","color":"#000000"}'>
                 神戸駅 Kobe Station
               </option>
     
               <option value='34.6882142,135.1881104'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1899'
-                      data-placeid='ChIJkaqwvf2OAGARARl_1gEYbx0'>
+                      data-placeid='ChIJkaqwvf2OAGARARl_1gEYbx0'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1899","color":"#000000"}'>
                 南京町 Kobe Chinatown Nankin-machi
               </option>
     
               <option value='34.6947159,135.1907243'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1598-historic-building_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1598'
-                      data-placeid='ChIJweCflOOOAGARSAhXB35rPCY'>
+                      data-placeid='ChIJweCflOOOAGARSAhXB35rPCY'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1598-historic-building_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1598","color":"#000000"}'>
                 生田神社 Ikuta-jinja Shrine
-              </option>
-    
-              <option value='34.6980326,135.1916258'
-                      data-group='4'
-                      data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
-                      data-icon-number='1577'
-                      data-placeid='ChIJIbt1zeaOAGARBhMtXe5U5HI'>
-                和黒 北野坂本店 Wakkoqu
-              </option>
-    
-              <option value='34.7045734,135.1952335'
-                      data-group='4'
-                      data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
-                      data-icon-number='1577'
-                      data-placeid='ChIJ7UX22ul_AGAROXiLIJYxXFI'>
-                和黒 新神戸店 Wakkoqu
-              </option>
-    
-              <option value='34.6926884,135.1918262'
-                      data-group='4'
-                      data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
-                      data-icon-number='1577'
-                      data-placeid='ChIJUXevGeSOAGARSmf_bLLZ_-8'>
-                鉄板焼 雪月花 本店 kobebeef steak house teppanyaki setsugetsuka honten
-              </option>
-    
-              <option value='34.6929964,135.1921423'
-                      data-group='4'
-                      data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
-                      data-icon-number='1577'
-                      data-placeid='ChIJVVUFoeSOAGAR4_Sbxs2rOzs'>
-                Steakland Kobe
-              </option>
-    
-              <option value='34.6884735,135.1859196'
-                      data-group='4'
-                      data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
-                      data-icon-number='1577'
-                      data-placeid='ChIJ6UzSuAKPAGARm1dRiqKQsUM'>
-                洋食 Quattro Yoshoku Quattro
-              </option>
-    
-              <option value='34.6861976,135.1868326'
-                      data-group='4'
-                      data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
-                      data-icon-number='1577'
-                      data-placeid='ChIJS9AVCgKPAGARUMcF-5P3mrk'>
-                Patisserie Mont Plus
-              </option>
-    
-              <option value='34.6998321,135.1902342'
-                      data-group='4'
-                      data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
-                      data-icon-number='1534'
-                      data-placeid='ChIJrVIbmeCOAGARQAS2XOtwiLs'>
-                Starbucks Coffee - Kobe Kitano Ijinkan
               </option>
     
               <option value='34.688862,135.1894819'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJ-8xjmQKPAGARLnD-uksTTOo'>
+                      data-placeid='ChIJ-8xjmQKPAGARLnD-uksTTOo'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1684","color":"#000000"}'>
                 神戶元町商店街 Kobe Motomachi Shopping Street
               </option>
     
               <option value='34.688689,135.1900346'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJz2ziZ_yOAGARzxS9kGFnezs'>
+                      data-placeid='ChIJz2ziZ_yOAGARzxS9kGFnezs'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1684","color":"#000000"}'>
                 大丸神戸店 Daimaru Kobe
+              </option>
+    
+              <option value='34.6861976,135.1868326'
+                      data-group='4'
+                      data-color='#000000'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=000000,ff000000&scale=1.0'
+                      data-icon-number='1534'
+                      data-placeid='ChIJS9AVCgKPAGARUMcF-5P3mrk'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1534","color":"#000000"}'>
+                Patisserie Mont Plus
               </option>
     
               <option value='34.6911739,135.1918152'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1684'
-                      data-placeid='ChIJzTIY6PqOAGARCO1VPdaTst4'>
+                      data-placeid='ChIJzTIY6PqOAGARCO1VPdaTst4'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1684-shopping-bag_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1684","color":"#000000"}'>
                 神戸三宮センター街 Sannomiya Center Gai Shopping Street
+              </option>
+    
+              <option value='34.6998321,135.1902342'
+                      data-group='4'
+                      data-color='#000000'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=000000,ff000000&scale=1.0'
+                      data-icon-number='1534'
+                      data-placeid='ChIJrVIbmeCOAGARQAS2XOtwiLs'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1534-cafe-cup_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1534","color":"#000000"}'>
+                Starbucks Coffee - Kobe Kitano Ijinkan
               </option>
     
               <option value='34.7007283,135.1907906'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1899'
-                      data-placeid='ChIJT6cViuCOAGARegX_ORkvbs0'>
+                      data-placeid='ChIJT6cViuCOAGARegX_ORkvbs0'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1899","color":"#000000"}'>
                 神戸北野異人館街 Kobe Kitano Ijinkan-Gai
-              </option>
-    
-              <option value='34.6907177,135.1886264'
-                      data-group='4'
-                      data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
-                      data-icon-number='1577'
-                      data-placeid='ChIJiWGfzeKOAGARl-vFFK6bpP4'>
-                Red Rock Motomachi
-              </option>
-    
-              <option value='34.6924221,135.19206'
-                      data-group='4'
-                      data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
-                      data-icon-number='1577'
-                      data-placeid='ChIJz6idq-SOAGARSQSToTxtnRY'>
-                Red Rock
               </option>
     
               <option value='34.7006601,135.1900265'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1899'
-                      data-placeid='ChIJtyH0Ot6OAGARdG9wODCpcT0'>
+                      data-placeid='ChIJtyH0Ot6OAGARdG9wODCpcT0'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1899","color":"#000000"}'>
                 風見鶏本舗
               </option>
     
               <option value='34.7342415,135.2063283'
                       data-group='4'
                       data-color='#000000'
-                      data-icon-url='https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=000000,ff000000&scale=1.0'
                       data-icon-number='1899'
-                      data-placeid='ChIJK9Er5z6JAGAR6-_inZvie2o'>
+                      data-placeid='ChIJK9Er5z6JAGAR6-_inZvie2o'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1899","color":"#000000"}'>
                 掬星台 Kikuseidai (Observation Platform)
+              </option>
+    
+              <option value='34.7045734,135.1952335'
+                      data-group='4'
+                      data-color='#000000'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0'
+                      data-icon-number='1577'
+                      data-placeid='ChIJ7UX22ul_AGAROXiLIJYxXFI'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1577","color":"#000000"}'>
+                和黒 新神戸店 Wakkoqu
+              </option>
+    
+              <option value='34.6926884,135.1918262'
+                      data-group='4'
+                      data-color='#000000'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0'
+                      data-icon-number='1577'
+                      data-placeid='ChIJUXevGeSOAGARSmf_bLLZ_-8'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1577","color":"#000000"}'>
+                鉄板焼 雪月花 本店 kobebeef steak house teppanyaki setsugetsuka honten
+              </option>
+    
+              <option value='34.6929964,135.1921423'
+                      data-group='4'
+                      data-color='#000000'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0'
+                      data-icon-number='1577'
+                      data-placeid='ChIJVVUFoeSOAGAR4_Sbxs2rOzs'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1577","color":"#000000"}'>
+                Steakland Kobe
+              </option>
+    
+              <option value='34.6884735,135.1859196'
+                      data-group='4'
+                      data-color='#000000'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0'
+                      data-icon-number='1577'
+                      data-placeid='ChIJ6UzSuAKPAGARm1dRiqKQsUM'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1577","color":"#000000"}'>
+                洋食 Quattro Yoshoku Quattro
+              </option>
+    
+              <option value='34.6924221,135.19206'
+                      data-group='4'
+                      data-color='#000000'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0'
+                      data-icon-number='1577'
+                      data-placeid='ChIJz6idq-SOAGARSQSToTxtnRY'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1577","color":"#000000"}'>
+                [Donburi] Red Rock
+              </option>
+    
+              <option value='34.6907177,135.1886264'
+                      data-group='4'
+                      data-color='#000000'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0'
+                      data-icon-number='1577'
+                      data-placeid='ChIJiWGfzeKOAGARl-vFFK6bpP4'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1577","color":"#000000"}'>
+                [Donburi] Red Rock Motomachi
+              </option>
+    
+              <option value='34.6920479,135.1910015'
+                      data-group='4'
+                      data-color='#000000'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0'
+                      data-icon-number='1577'
+                      data-placeid='ChIJ7dlzvqyPAGARg6PjVeQmJ9o'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1577","color":"#000000"}'>
+                [Sushi] 大衆寿司酒場 すさび湯 三宮店Susabiyu Sannomiya
+              </option>
+    
+              <option value='34.6925643,135.191693'
+                      data-group='4'
+                      data-color='#000000'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0'
+                      data-icon-number='1577'
+                      data-placeid='ChIJkQmOpMWPAGARh0X9ToavLs4'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1577","color":"#000000"}'>
+                [Sushi] 三宮スシエビス
+              </option>
+    
+              <option value='34.6952998,135.1966451'
+                      data-group='4'
+                      data-color='#000000'
+                      data-icon-url='https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0'
+                      data-icon-number='1577'
+                      data-placeid='ChIJYzEI8--OAGAROTN5OfzWiw0'
+                      data-custom-properties='{"iconUrl":"https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1577-food-fork-knife_4x.png&highlight=000000,ff000000&scale=1.0","iconNumber":"1577","color":"#000000"}'>
+                [Sushi] もりもり寿し 三宮OPA2店 Morimori-Sushi Sannomiya OPA2
               </option>
     
             </select>
@@ -1630,6 +1955,7 @@
       var from_html = $('#from').html();
       var to_html = $('#to').html();
       var map, marker, infowindow;
+      var fromChoices, toChoices;
 
       function initMap() {
         // Get the first POI coordinates for map center, fallback to Tokyo
@@ -1681,14 +2007,95 @@
         localStorage.setItem(getStorageKey(), JSON.stringify(activeGroups));
       }
 
+      // Initialize Choices.js with custom template for icons
+      function initChoices() {
+        // Destroy existing instances if they exist
+        if (fromChoices) fromChoices.destroy();
+        if (toChoices) toChoices.destroy();
+
+        fromChoices = new Choices('#from', {
+          searchEnabled: false,
+          itemSelectText: '',
+          shouldSort: false,
+          callbackOnCreateTemplates: function(template) {
+            return {
+              item: ({ classNames }, data) => {
+                const iconUrl = data.customProperties?.iconUrl || '';
+                const iconHtml = iconUrl === 'bootstrap-icon'
+                  ? '<i class="bi bi-geo-alt-fill poi-icon-bootstrap"></i>'
+                  : (iconUrl ? `<img src="${iconUrl}" class="poi-icon" alt="" />` : '');
+                return template(`
+                  <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable}" data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''}>
+                    ${iconHtml}
+                    ${data.label}
+                  </div>
+                `);
+              },
+              choice: ({ classNames }, data) => {
+                const iconUrl = data.customProperties?.iconUrl || '';
+                const iconHtml = iconUrl === 'bootstrap-icon'
+                  ? '<i class="bi bi-geo-alt-fill poi-icon-bootstrap"></i>'
+                  : (iconUrl ? `<img src="${iconUrl}" class="poi-icon" alt="" />` : '');
+                return template(`
+                  <div class="${classNames.item} ${classNames.itemChoice} ${data.disabled ? classNames.itemDisabled : classNames.itemSelectable}" data-select-text="${this.config.itemSelectText}" data-choice ${data.disabled ? 'data-choice-disabled aria-disabled="true"' : 'data-choice-selectable'} data-id="${data.id}" data-value="${data.value}" ${data.groupId > 0 ? 'role="treeitem"' : 'role="option"'}>
+                    ${iconHtml}
+                    ${data.label}
+                  </div>
+                `);
+              }
+            };
+          }
+        });
+
+        toChoices = new Choices('#to', {
+          searchEnabled: false,
+          itemSelectText: '',
+          shouldSort: false,
+          callbackOnCreateTemplates: function(template) {
+            return {
+              item: ({ classNames }, data) => {
+                const iconUrl = data.customProperties?.iconUrl || '';
+                const iconHtml = iconUrl === 'bootstrap-icon'
+                  ? '<i class="bi bi-geo-alt-fill poi-icon-bootstrap"></i>'
+                  : (iconUrl ? `<img src="${iconUrl}" class="poi-icon" alt="" />` : '');
+                return template(`
+                  <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable}" data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''}>
+                    ${iconHtml}
+                    ${data.label}
+                  </div>
+                `);
+              },
+              choice: ({ classNames }, data) => {
+                const iconUrl = data.customProperties?.iconUrl || '';
+                const iconHtml = iconUrl === 'bootstrap-icon'
+                  ? '<i class="bi bi-geo-alt-fill poi-icon-bootstrap"></i>'
+                  : (iconUrl ? `<img src="${iconUrl}" class="poi-icon" alt="" />` : '');
+                return template(`
+                  <div class="${classNames.item} ${classNames.itemChoice} ${data.disabled ? classNames.itemDisabled : classNames.itemSelectable}" data-select-text="${this.config.itemSelectText}" data-choice ${data.disabled ? 'data-choice-disabled aria-disabled="true"' : 'data-choice-selectable'} data-id="${data.id}" data-value="${data.value}" ${data.groupId > 0 ? 'role="treeitem"' : 'role="option"'}>
+                    ${iconHtml}
+                    ${data.label}
+                  </div>
+                `);
+              }
+            };
+          }
+        });
+      }
+
       // Update the dropdowns based on active selections
       function updateOptionsDisplay() {
-        $('#from').html(from_html).change();
+        $('#from').html(from_html);
         $('#to').html(to_html);
         $('.nav-link:not(.active)').each(function () {
           var hide_group = $(this).data('group');
           $(`option[data-group="${hide_group}"]`).remove();
         });
+
+        // Re-initialize Choices.js with updated options
+        initChoices();
+
+        // Trigger change event on from dropdown
+        $('#from').trigger('change');
       }
 
       // Create a simple colored marker element
@@ -1789,7 +2196,13 @@
         updateOptionsDisplay();
       });
 
-      $('#from, #to, [name="mode"]').on('click', function () {
+      // Handle change events for Choices.js dropdowns
+      $(document).on('change', '#from, #to', function () {
+        $('#apple').empty().append('No Route Yet');
+        $('#google').empty().append('No Route Yet');
+      });
+
+      $('[name="mode"]').on('click', function () {
         $('#apple').empty().append('No Route Yet');
         $('#google').empty().append('No Route Yet');
       });
@@ -1803,11 +2216,11 @@
         var to_color = $('#to option:selected').data('color');
         var mode = $('[name="mode"]:checked').val();
         var href_text = `
-          <span class="bi bi-geo-alt-fill" style="color: #${from_color};"></span>
-          <span style='color: #${from_color};'>${from_text}</span>
+          <span class="bi bi-geo-alt-fill" style="color: ${from_color};"></span>
+          <span style='color: ${from_color};'>${from_text}</span>
           &nbsp;<span class="bi bi-arrow-right"></span>&nbsp;
-          <span class="bi bi-geo-alt-fill" style="color: #${to_color};"></span>
-          <span style='color: #${to_color};'>${to_text}</span>
+          <span class="bi bi-geo-alt-fill" style="color: ${to_color};"></span>
+          <span style='color: ${to_color};'>${to_text}</span>
         `;
 
         var mode_apple = 'r';
@@ -1823,7 +2236,8 @@
         $('#google').empty().append(`<a href="${api_google}" target="_blank">${href_text}</a>`);
       });
 
-      $('#from').on('change', function () {
+      // Use event delegation for the change event since Choices.js recreates the select
+      $(document).on('change', '#from', function () {
         var location = $(this).val();
         var geocode = location.split(',');
         var place_name = $(this).find('option:selected').text();
@@ -1844,6 +2258,8 @@
       // Load saved selections when page is ready
       $(document).ready(function() {
         loadSavedSelections();
+        // Initialize Choices.js after loading saved selections
+        initChoices();
       });
     </script>
     <!-- Bootstrap Icons -->

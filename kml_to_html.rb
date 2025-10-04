@@ -6,6 +6,7 @@ require 'open-uri'
 require 'json'
 require 'net/http'
 require 'dotenv'
+require 'base64'
 
 Dotenv.load
 
@@ -97,7 +98,7 @@ end
 
 lists = ''
 options = %(
-              <option value="" data-color="#d3a">Current Location</option>
+              <option value="" data-color="#d3a" data-custom-properties='{"iconUrl":"bootstrap-icon"}'>Current Location</option>
 )
 
 doc.css('Folder').each_with_index do |folder, index|
@@ -121,7 +122,6 @@ doc.css('Folder').each_with_index do |folder, index|
 
     # Use RGB color from KML, fallback to extracting from styleUrl
     color = style_info[:rgb_color] || (style_url ? "##{style_url.split('-')[2]}" : 'default')
-    icon_url = style_info[:icon_url]
     icon_number = style_info[:icon_number]
 
     coordinates = placemark.at_css('coordinates').children.text.strip.split(',')
@@ -132,13 +132,37 @@ doc.css('Folder').each_with_index do |folder, index|
     # Create visual color indicator for the option text
     display_name = name
 
+    # Use Google Maps individual icon URLs with color highlight
+    # Icon names mapping
+    icon_names = {
+      '1504' => '1504-airport-plane_4x.png',
+      '1534' => '1534-cafe-cup_4x.png',
+      '1577' => '1577-food-fork-knife_4x.png',
+      '1598' => '1598-historic-building_4x.png',
+      '1602' => '1602-hotel-bed_4x.png',
+      '1684' => '1684-shopping-bag_4x.png',
+      '1716' => '1716-train_4x.png',
+      '1899' => '1899-blank-shape_pin_4x.png'
+    }
+
+    icon_name = icon_names[icon_number] || '1899-blank-shape_pin_4x.png'
+    # Remove # from color for URL parameter
+    highlight_color = color ? color.gsub('#', '') : '000000'
+
+    # Icon 1899 uses pin-container instead of regular container
+    container = (icon_number == '1899') ? 'SHARED-mymaps-pin-container_4x.png' : 'SHARED-mymaps-container_4x.png'
+
+    # Google Maps icon URL with container and highlight
+    google_icon_url = "https://mt.google.com/vt/icon/name=icons/onion/#{container},icons/onion/#{icon_name}&highlight=#{highlight_color},ff000000&scale=1.0"
+
     options += %(
               <option value='#{coordinates[1]},#{coordinates[0]}'
                       data-group='#{index}'
                       data-color='#{color}'
-                      data-icon-url='#{icon_url}'
+                      data-icon-url='#{google_icon_url}'
                       data-icon-number='#{icon_number}'
-                      data-placeid='#{place_id}'>
+                      data-placeid='#{place_id}'
+                      data-custom-properties='{"iconUrl":"#{google_icon_url}","iconNumber":"#{icon_number}","color":"#{color}"}'>
                 #{display_name}
               </option>
     )
@@ -159,6 +183,11 @@ html = <<~HTML
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
       <!-- Bootstrap 5 JS -->
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+      <!-- Choices.js CSS -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+      <!-- Choices.js JS -->
+      <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 
       <!-- Latest Google Maps JS API with callback -->
       <script src="https://maps.googleapis.com/maps/api/js?key=#{api_key_restricted}&callback=initMap&libraries=places,marker&loading=async" async defer></script>
@@ -184,6 +213,62 @@ html = <<~HTML
           border: 1px solid #ccc;
           vertical-align: middle;
         }
+
+        /* Choices.js Bootstrap 5 theming */
+        .choices {
+          margin-bottom: 0;
+        }
+        .choices__inner {
+          background-color: #fff;
+          border: 1px solid #dee2e6;
+          border-radius: 0.375rem;
+          font-size: 1rem;
+          min-height: 38px;
+          padding: 0.375rem 0.75rem;
+        }
+        .choices__inner:focus-within {
+          border-color: #86b7fe;
+          outline: 0;
+          box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+        .choices__list--dropdown {
+          border: 1px solid #dee2e6;
+          border-radius: 0.375rem;
+          box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+        .choices__list--dropdown .choices__item--selectable {
+          padding: 0.5rem 1rem;
+        }
+        .choices__list--dropdown .choices__item--selectable.is-highlighted {
+          background-color: #0d6efd !important;
+          color: #fff !important;
+        }
+        .choices[data-type*=select-one] .choices__inner {
+          padding-bottom: 0.375rem;
+        }
+
+        /* Custom icon display in Choices.js using Google Maps individual icons */
+        .choices__item--choice .poi-icon,
+        .choices__item .poi-icon {
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          margin-right: 8px;
+          vertical-align: middle;
+        }
+
+        /* Bootstrap icon styling for Current Location */
+        .poi-icon-bootstrap {
+          display: inline-block;
+          width: 20px;
+          margin-right: 8px;
+          font-size: 16px;
+          color: #6c757d;
+          text-align: center;
+          line-height: 1;
+          vertical-align: text-bottom;
+        }
+
         @media screen and (max-width: 576px) {
           .form-label { font-size: 12px; font-weight: bold; padding: 8px 0 0 15px; }
           .form-control { margin-left: 10px; width: 95%; }
@@ -268,6 +353,7 @@ html = <<~HTML
         var from_html = $('#from').html();
         var to_html = $('#to').html();
         var map, marker, infowindow;
+        var fromChoices, toChoices;
 
         function initMap() {
           // Get the first POI coordinates for map center, fallback to Tokyo
@@ -319,14 +405,95 @@ html = <<~HTML
           localStorage.setItem(getStorageKey(), JSON.stringify(activeGroups));
         }
 
+        // Initialize Choices.js with custom template for icons
+        function initChoices() {
+          // Destroy existing instances if they exist
+          if (fromChoices) fromChoices.destroy();
+          if (toChoices) toChoices.destroy();
+
+          fromChoices = new Choices('#from', {
+            searchEnabled: false,
+            itemSelectText: '',
+            shouldSort: false,
+            callbackOnCreateTemplates: function(template) {
+              return {
+                item: ({ classNames }, data) => {
+                  const iconUrl = data.customProperties?.iconUrl || '';
+                  const iconHtml = iconUrl === 'bootstrap-icon'
+                    ? '<i class="bi bi-geo-alt-fill poi-icon-bootstrap"></i>'
+                    : (iconUrl ? `<img src="${iconUrl}" class="poi-icon" alt="" />` : '');
+                  return template(`
+                    <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable}" data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''}>
+                      ${iconHtml}
+                      ${data.label}
+                    </div>
+                  `);
+                },
+                choice: ({ classNames }, data) => {
+                  const iconUrl = data.customProperties?.iconUrl || '';
+                  const iconHtml = iconUrl === 'bootstrap-icon'
+                    ? '<i class="bi bi-geo-alt-fill poi-icon-bootstrap"></i>'
+                    : (iconUrl ? `<img src="${iconUrl}" class="poi-icon" alt="" />` : '');
+                  return template(`
+                    <div class="${classNames.item} ${classNames.itemChoice} ${data.disabled ? classNames.itemDisabled : classNames.itemSelectable}" data-select-text="${this.config.itemSelectText}" data-choice ${data.disabled ? 'data-choice-disabled aria-disabled="true"' : 'data-choice-selectable'} data-id="${data.id}" data-value="${data.value}" ${data.groupId > 0 ? 'role="treeitem"' : 'role="option"'}>
+                      ${iconHtml}
+                      ${data.label}
+                    </div>
+                  `);
+                }
+              };
+            }
+          });
+
+          toChoices = new Choices('#to', {
+            searchEnabled: false,
+            itemSelectText: '',
+            shouldSort: false,
+            callbackOnCreateTemplates: function(template) {
+              return {
+                item: ({ classNames }, data) => {
+                  const iconUrl = data.customProperties?.iconUrl || '';
+                  const iconHtml = iconUrl === 'bootstrap-icon'
+                    ? '<i class="bi bi-geo-alt-fill poi-icon-bootstrap"></i>'
+                    : (iconUrl ? `<img src="${iconUrl}" class="poi-icon" alt="" />` : '');
+                  return template(`
+                    <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable}" data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''}>
+                      ${iconHtml}
+                      ${data.label}
+                    </div>
+                  `);
+                },
+                choice: ({ classNames }, data) => {
+                  const iconUrl = data.customProperties?.iconUrl || '';
+                  const iconHtml = iconUrl === 'bootstrap-icon'
+                    ? '<i class="bi bi-geo-alt-fill poi-icon-bootstrap"></i>'
+                    : (iconUrl ? `<img src="${iconUrl}" class="poi-icon" alt="" />` : '');
+                  return template(`
+                    <div class="${classNames.item} ${classNames.itemChoice} ${data.disabled ? classNames.itemDisabled : classNames.itemSelectable}" data-select-text="${this.config.itemSelectText}" data-choice ${data.disabled ? 'data-choice-disabled aria-disabled="true"' : 'data-choice-selectable'} data-id="${data.id}" data-value="${data.value}" ${data.groupId > 0 ? 'role="treeitem"' : 'role="option"'}>
+                      ${iconHtml}
+                      ${data.label}
+                    </div>
+                  `);
+                }
+              };
+            }
+          });
+        }
+
         // Update the dropdowns based on active selections
         function updateOptionsDisplay() {
-          $('#from').html(from_html).change();
+          $('#from').html(from_html);
           $('#to').html(to_html);
           $('.nav-link:not(.active)').each(function () {
             var hide_group = $(this).data('group');
             $(`option[data-group="${hide_group}"]`).remove();
           });
+
+          // Re-initialize Choices.js with updated options
+          initChoices();
+
+          // Trigger change event on from dropdown
+          $('#from').trigger('change');
         }
 
         // Create a simple colored marker element
@@ -427,7 +594,13 @@ html = <<~HTML
           updateOptionsDisplay();
         });
 
-        $('#from, #to, [name="mode"]').on('click', function () {
+        // Handle change events for Choices.js dropdowns
+        $(document).on('change', '#from, #to', function () {
+          $('#apple').empty().append('No Route Yet');
+          $('#google').empty().append('No Route Yet');
+        });
+
+        $('[name="mode"]').on('click', function () {
           $('#apple').empty().append('No Route Yet');
           $('#google').empty().append('No Route Yet');
         });
@@ -441,11 +614,11 @@ html = <<~HTML
           var to_color = $('#to option:selected').data('color');
           var mode = $('[name="mode"]:checked').val();
           var href_text = `
-            <span class="bi bi-geo-alt-fill" style="color: #${from_color};"></span>
-            <span style='color: #${from_color};'>${from_text}</span>
+            <span class="bi bi-geo-alt-fill" style="color: ${from_color};"></span>
+            <span style='color: ${from_color};'>${from_text}</span>
             &nbsp;<span class="bi bi-arrow-right"></span>&nbsp;
-            <span class="bi bi-geo-alt-fill" style="color: #${to_color};"></span>
-            <span style='color: #${to_color};'>${to_text}</span>
+            <span class="bi bi-geo-alt-fill" style="color: ${to_color};"></span>
+            <span style='color: ${to_color};'>${to_text}</span>
           `;
 
           var mode_apple = 'r';
@@ -461,7 +634,8 @@ html = <<~HTML
           $('#google').empty().append(`<a href="${api_google}" target="_blank">${href_text}</a>`);
         });
 
-        $('#from').on('change', function () {
+        // Use event delegation for the change event since Choices.js recreates the select
+        $(document).on('change', '#from', function () {
           var location = $(this).val();
           var geocode = location.split(',');
           var place_name = $(this).find('option:selected').text();
@@ -482,6 +656,8 @@ html = <<~HTML
         // Load saved selections when page is ready
         $(document).ready(function() {
           loadSavedSelections();
+          // Initialize Choices.js after loading saved selections
+          initChoices();
         });
       </script>
       <!-- Bootstrap Icons -->
